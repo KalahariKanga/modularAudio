@@ -13,5 +13,5 @@ SimpleOscillator::~SimpleOscillator()
 void SimpleOscillator::render()
 {
 	for (int c = 0; c < BUFFER_LENGTH; c++)
-		buffer.data[c] = 512 * sin((float)(n*BUFFER_LENGTH + c) / 20);
+		buffer.data[c] = 256 * sin(((double)(BUFFER_LENGTH*n + c) / SAMPLE_RATE) * 2 * PI * note.frequency);
 }

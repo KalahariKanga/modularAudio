@@ -1,6 +1,6 @@
 #include "core.h"
 #include "SimpleOscillator.h"
-
+#include "AmpEnvelope.h"
 int AudioComponent::n;
 int main(int argc, char** argv[])
 {
@@ -13,13 +13,20 @@ int main(int argc, char** argv[])
 	BASS_ChannelPlay(stream, 0);
 
 	SimpleOscillator simposc;
-	short* output = simposc.buffer.data;
-
+	AmpEnvelope ampenv;
+	ampenv.ins.push_back(&simposc);
+	short* output = ampenv.buffer.data;
+	simposc.note = Note(440, 128);
 	AudioComponent::n = 0;
 	while (1)
 	{
 		simposc.render();
-		std::cout << simposc.buffer.data[0] << "\n";
+		ampenv.render();
+		if (rand() % 100 == 0)
+		{
+			simposc.note = Note(100 * rand() % 2000, 128);
+			ampenv.noteDown();
+		}
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};
 		BASS_StreamPutData(stream, (void*)output, BUFFER_LENGTH*sizeof(short));
 		AudioComponent::n++;

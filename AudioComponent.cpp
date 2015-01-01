@@ -3,6 +3,7 @@
 
 AudioComponent::AudioComponent()
 {
+	startn = n;
 }
 
 
