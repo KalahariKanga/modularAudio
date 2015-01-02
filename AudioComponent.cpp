@@ -17,3 +17,10 @@ void AudioComponent::render()
 		for (int c = 0; c < BUFFER_LENGTH; c++)
 			buffer[c] += ac->buffer[c];
 }
+
+void AudioComponent::update()
+{
+	for (auto i : ins)
+		i->update();
+	render();
+}

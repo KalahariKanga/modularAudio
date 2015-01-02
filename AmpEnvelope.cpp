@@ -14,7 +14,13 @@ AmpEnvelope::~AmpEnvelope()
 void AmpEnvelope::render()
 {
 	for (int c = 0; c < BUFFER_LENGTH; c++)
-		buffer.data[c] = ins.front()->buffer.data[c] * envelope(c);
+	{
+		buffer.data[c] = 0;
+		for (auto i : ins)
+		{
+			buffer.data[c] += i->buffer.data[c] * envelope(c);
+		}
+	}
 }
 
 float AmpEnvelope::envelope(int c)

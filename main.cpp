@@ -12,19 +12,24 @@ int main(int argc, char** argv[])
 	stream = BASS_StreamCreate(SAMPLE_RATE, 1, 0, STREAMPROC_PUSH, NULL);
 	BASS_ChannelPlay(stream, 0);
 
-	SimpleOscillator simposc;
+
+	SimpleOscillator simposc1, simposc2;
 	AmpEnvelope ampenv;
-	ampenv.ins.push_back(&simposc);
+	ampenv.ins.push_back(&simposc1);
+	ampenv.ins.push_back(&simposc2);
 	short* output = ampenv.buffer.data;
-	simposc.note = Note(440, 128);
+	simposc1.note = Note(440, 128);
+	simposc2.note = Note(660, 128);
+
+
 	AudioComponent::n = 0;
 	while (1)
 	{
-		simposc.render();
-		ampenv.render();
+		ampenv.update();
 		if (rand() % 100 == 0)
 		{
-			simposc.note = Note(100 * rand() % 2000, 128);
+			simposc1.note = Note(100 * rand() % 2000, 128);
+			simposc2.note = Note(100 * rand() % 2000, 128);
 			ampenv.noteDown();
 		}
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};

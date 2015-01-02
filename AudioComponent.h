@@ -13,5 +13,6 @@ public:
 	static int n;
 	int startn;
 	Note note;
+	void update();
 };
 
