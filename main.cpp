@@ -1,7 +1,9 @@
 #include "core.h"
 #include "SimpleOscillator.h"
 #include "AmpEnvelope.h"
-int AudioComponent::n;
+#include "AudioOutput.h"
+
+
 int main(int argc, char** argv[])
 {
 	BASS_Init(-1, SAMPLE_RATE, 0, 0, NULL);
@@ -15,21 +17,24 @@ int main(int argc, char** argv[])
 
 	SimpleOscillator simposc1, simposc2;
 	AmpEnvelope ampenv;
-	ampenv.ins.push_back(&simposc1);
-	ampenv.ins.push_back(&simposc2);
-	short* output = ampenv.buffer.data;
-	simposc1.note = Note(440, 128);
-	simposc2.note = Note(660, 128);
+	AudioOutput audiooutput;
+	simposc1.linkTo(&ampenv);
+	simposc2.linkTo(&ampenv);
+	ampenv.linkTo(&audiooutput);
+
+	short* output = audiooutput.buffer.data;
+	simposc1.note = Note(c4, 128);
+	simposc2.note = Note(ds4, 128);
 
 
 	AudioComponent::n = 0;
 	while (1)
 	{
-		ampenv.update();
+		audiooutput.update();
 		if (rand() % 100 == 0)
 		{
-			simposc1.note = Note(100 * rand() % 2000, 128);
-			simposc2.note = Note(100 * rand() % 2000, 128);
+			simposc1.note = Note((Notes)(rand() % 108), 128);
+			simposc2.note = Note((Notes)(rand() % 108), 128);
 			ampenv.noteDown();
 		}
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};

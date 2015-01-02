@@ -7,5 +7,6 @@ public:
 	~AudioBuffer();
 	short* data;
 	short& operator[](int i);
+	void zero();
 };
 

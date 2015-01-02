@@ -4,9 +4,10 @@ Note::Note()
 {
 
 }
-Note::Note(int f, int v)
+Note::Note(Notes n, int v)
 {
-	frequency = f;
+	note = n;
+	frequency = 440 * (pow(pow(2, (double)1 / 12), note - a3));
 	velocity = v;
 }
 

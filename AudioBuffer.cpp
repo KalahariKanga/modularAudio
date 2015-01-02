@@ -22,3 +22,9 @@ short& AudioBuffer::operator[](int i)
 		return data[BUFFER_LENGTH - 1];
 	return data[i];
 }
+
+void AudioBuffer::zero()
+{
+	for (int c = 0; c < BUFFER_LENGTH; c++)
+		data[c] = 0;
+}
