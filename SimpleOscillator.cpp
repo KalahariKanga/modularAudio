@@ -10,8 +10,7 @@ SimpleOscillator::~SimpleOscillator()
 {
 }
 
-void SimpleOscillator::render()
+double SimpleOscillator::getSample(double pos)
 {
-	for (int c = 0; c < BUFFER_LENGTH; c++)
-		buffer.data[c] = 256 * sin(((double)(BUFFER_LENGTH*n + c) / SAMPLE_RATE) * 2 * PI * note.frequency);
+	return sin(pos);
 }

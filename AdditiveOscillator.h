@@ -1,12 +1,12 @@
 #pragma once
-#include "AudioComponent.h"
 #include "Oscillator.h"
-class SimpleOscillator :
+class AdditiveOscillator :
 	public Oscillator
 {
 public:
-	SimpleOscillator();
-	~SimpleOscillator();
+	AdditiveOscillator();
+	~AdditiveOscillator();
 	double getSample(double pos);
+	float amount[64];
 };
 
