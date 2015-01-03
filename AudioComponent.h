@@ -8,10 +8,13 @@ public:
 	AudioComponent();
 	~AudioComponent();
 	std::vector<AudioComponent*> ins;
+	std::map<std::string, float*> parameters;
+	std::map<float*, float*> links;
+	float* getParameter(std::string);
 	virtual void render();
 	void update();
-	void linkTo(AudioComponent* other);
-
+	void outputTo(AudioComponent* other);
+	void link(std::string name, AudioComponent* other, std::string othername);
 	AudioBuffer buffer;
 	static int n;
 	int startn;

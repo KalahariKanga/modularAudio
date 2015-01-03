@@ -3,6 +3,8 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
+#include <map>
+#include <string>
 
 #define SAMPLE_RATE 44100
 #define BUFFER_LENGTH 256

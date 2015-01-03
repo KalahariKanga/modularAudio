@@ -1,7 +1,9 @@
 #include "core.h"
 #include "SimpleOscillator.h"
 #include "AmpEnvelope.h"
+#include "AdditiveOscillator.h"
 #include "AudioOutput.h"
+#include "LFO.h"
 
 
 int main(int argc, char** argv[])
@@ -15,26 +17,29 @@ int main(int argc, char** argv[])
 	BASS_ChannelPlay(stream, 0);
 
 
-	SimpleOscillator simposc1, simposc2;
+	AdditiveOscillator osc;
 	AmpEnvelope ampenv;
 	AudioOutput audiooutput;
-	simposc1.linkTo(&ampenv);
-	simposc2.linkTo(&ampenv);
-	ampenv.linkTo(&audiooutput);
+	LFO lfo;
 
+	osc.outputTo(&ampenv);
+	ampenv.outputTo(&audiooutput);
+	lfo.link("lfo", &osc, "amount1");
+	lfo.link("lfo", &osc, "amount3");
+	lfo.link("lfo", &osc, "amount5");
 	short* output = audiooutput.buffer.data;
-	simposc1.note = Note(c4, 128);
-	simposc2.note = Note(ds4, 128);
+	osc.note = Note(c2, 128);
+	
 
 
 	AudioComponent::n = 0;
 	while (1)
 	{
+		lfo.update();
 		audiooutput.update();
-		if (rand() % 100 == 0)
+		if (rand() % 50 == 0)
 		{
-			simposc1.note = Note((Notes)(rand() % 108), 128);
-			simposc2.note = Note((Notes)(rand() % 108), 128);
+			//osc.note = Note((Notes)(rand() % 108), 128);
 			ampenv.noteDown();
 		}
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};

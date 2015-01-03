@@ -21,12 +21,29 @@ void AudioComponent::render()
 
 void AudioComponent::update()
 {
+	for (auto l : links)
+		*(l.second) = *(l.first);
+
 	for (auto i : ins)
 		i->update();
+
 	render();
 }
 
-void AudioComponent::linkTo(AudioComponent* other)
+void AudioComponent::outputTo(AudioComponent* other)
 {
 	other->ins.push_back(this);
+}
+
+float* AudioComponent::getParameter(std::string name)
+{
+	return parameters.at(name);
+}
+
+void AudioComponent::link(std::string name, AudioComponent* other, std::string othername)
+{
+	std::pair<float*, float*> l;
+	l.first = getParameter(name);
+	l.second = other->getParameter(othername);
+	links.insert(l);
 }
