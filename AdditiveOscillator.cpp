@@ -5,16 +5,16 @@ AdditiveOscillator::AdditiveOscillator()
 {
 	for (int c = 0; c < 64; c++)
 	{
-		amount[c] = 0;
-		std::pair<std::string, float*> p;
-		p.first = "amount" + std::to_string(c);
-		p.second = &amount[c];
-		parameters.insert(p);
+		amount[c].value = 0;
+		amount[c].min = 0;
+		amount[c].max = 1;
+		std::string name = "amount" + std::to_string(c);
+		parameters.insert(std::pair<std::string, Parameter*>(name, &amount[c]));
 	}
-	amount[0] = 1;
-	amount[2] = 0.5;
-	amount[4] = 0.25;
-	amount[6] = 0.125;
+	amount[0].value = 1;
+	amount[2].value = 0.5;
+	amount[4].value = 0.25;
+	amount[6].value = 0.125;
 }
 
 
@@ -27,6 +27,6 @@ double AdditiveOscillator::getSample(double pos)
 	
 	double value = 0;
 	for (int c = 0; c < 64; c++)
-		value += amount[c] * sin((c+1)*pos);
+		value += amount[c].value * sin((c+1)*pos);
 	return value;
 }

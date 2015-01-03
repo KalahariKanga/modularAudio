@@ -6,8 +6,8 @@ class LFO :
 public:
 	LFO();
 	~LFO();
-	float value;
-	float freq;
+	Parameter value, freq;
+	
 	void render();
 };
 

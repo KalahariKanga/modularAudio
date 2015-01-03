@@ -2,15 +2,18 @@
 #include "core.h"
 #include "AudioBuffer.h"
 #include "Note.h"
+#include "Parameter.h"
 class AudioComponent
 {
 public:
 	AudioComponent();
 	~AudioComponent();
 	std::vector<AudioComponent*> ins;
-	std::map<std::string, float*> parameters;
-	std::map<float*, float*> links;
-	float* getParameter(std::string);
+
+	std::map<std::string, Parameter*> parameters;
+	std::vector<std::pair<Parameter*, Parameter*>> links;
+	Parameter* getParameter(std::string);
+
 	virtual void render();
 	void update();
 	void outputTo(AudioComponent* other);

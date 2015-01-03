@@ -27,6 +27,8 @@ int main(int argc, char** argv[])
 	lfo.link("lfo", &osc, "amount1");
 	lfo.link("lfo", &osc, "amount3");
 	lfo.link("lfo", &osc, "amount5");
+	
+
 	short* output = audiooutput.buffer.data;
 	osc.note = Note(c2, 128);
 	

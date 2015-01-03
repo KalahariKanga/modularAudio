@@ -22,7 +22,9 @@ void AudioComponent::render()
 void AudioComponent::update()
 {
 	for (auto l : links)
-		*(l.second) = *(l.first);
+	{
+		l.second->value = convertToRange(l.first->value, l.first->min, l.first->max, l.second->min, l.second->max);
+	}
 
 	for (auto i : ins)
 		i->update();
@@ -35,15 +37,15 @@ void AudioComponent::outputTo(AudioComponent* other)
 	other->ins.push_back(this);
 }
 
-float* AudioComponent::getParameter(std::string name)
+Parameter* AudioComponent::getParameter(std::string name)
 {
 	return parameters.at(name);
 }
 
 void AudioComponent::link(std::string name, AudioComponent* other, std::string othername)
 {
-	std::pair<float*, float*> l;
+	std::pair<Parameter*, Parameter*> l;
 	l.first = getParameter(name);
 	l.second = other->getParameter(othername);
-	links.insert(l);
+	links.push_back(l);
 }

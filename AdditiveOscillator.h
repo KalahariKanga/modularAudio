@@ -7,6 +7,6 @@ public:
 	AdditiveOscillator();
 	~AdditiveOscillator();
 	double getSample(double pos);
-	float amount[64];
+	Parameter amount[64];
 };
 

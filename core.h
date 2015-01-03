@@ -23,3 +23,6 @@ enum Notes
 	c6, cs6, d6, ds6, e6, f6, fs6, g6, gs6, a6, as6, b6
 
 };//could be in Note
+
+float clamp(float value, float min, float max);
+float convertToRange( float value, float oldmin, float oldmax, float newmin, float newmax);
