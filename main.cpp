@@ -33,7 +33,7 @@ int main(int argc, char** argv[])
 	osc.note = Note(c2, 128);
 	
 
-
+	bool which = 0;//dbg
 	AudioComponent::n = 0;
 	while (1)
 	{
@@ -42,7 +42,17 @@ int main(int argc, char** argv[])
 		if (rand() % 50 == 0)
 		{
 			//osc.note = Note((Notes)(rand() % 108), 128);
-			ampenv.noteDown();
+			if (which)
+			{
+				which = 0;
+				ampenv.noteUp();
+			}
+			else
+			{
+				which = 1;
+				ampenv.noteDown();
+			}
+			
 		}
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};
 		BASS_StreamPutData(stream, (void*)output, BUFFER_LENGTH*sizeof(short));
