@@ -17,5 +17,7 @@ public:
 	static int n;
 	int startn;
 	Note note;
+	bool needUpdate;
+	
 };
 
