@@ -1,9 +1,4 @@
-#include "core.h"
-#include "SimpleOscillator.h"
-#include "AmpEnvelope.h"
-#include "AdditiveOscillator.h"
-#include "AudioOutput.h"
-#include "LFO.h"
+#include "Collection.h"
 
 
 int main(int argc, char** argv[])
@@ -17,7 +12,7 @@ int main(int argc, char** argv[])
 	BASS_ChannelPlay(stream, 0);
 
 
-	AdditiveOscillator osc;
+	/*AdditiveOscillator osc;
 	AmpEnvelope ampenv;
 	AudioOutput audiooutput;
 	LFO lfo;
@@ -26,19 +21,23 @@ int main(int argc, char** argv[])
 	ampenv.outputTo(&audiooutput);
 	lfo.link("lfo", &osc, "amount1");
 	lfo.link("lfo", &osc, "amount3");
-	lfo.link("lfo", &osc, "amount5");
-	
-
-	short* output = audiooutput.buffer.data;
-	osc.note = Note(c2, 128);
+	lfo.link("lfo", &osc, "amount5");*/
+	Collection collection;
+	collection.addComponent("osc", "AdditiveOscillator");
+	collection.addComponent("ampenv", "AmpEnvelope");
+	collection.addComponent("lfo", "LFO");
+	collection.linkCV("lfo", "lfo", "osc", "amount1");
+	collection.linkAudio("osc", "ampenv");
+	collection.linkAudio("ampenv", "output");
+	short* output = ((AudioComponent*)(collection.outputComponent))->buffer.data;
+	collection.note = Note(c2, 128);
 	
 
 	bool which = 0;//dbg
 	AudioComponent::n = 0;
 	while (1)
 	{
-		lfo.update();
-		audiooutput.update();
+		collection.update();
 		if (rand() % 100 == 0)
 		{
 			
@@ -46,13 +45,13 @@ int main(int argc, char** argv[])
 			{
 				
 				which = 0;
-				ampenv.noteUp();
+				collection.noteUp();
 			}
 			else
 			{
-				osc.note = Note((Notes)(rand() % 108), 128);
+				collection.note = Note((Notes)(rand() % 108), 128);
 				which = 1;
-				ampenv.noteDown();
+				collection.noteDown();
 			}
 			
 		}

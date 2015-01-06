@@ -38,4 +38,3 @@ void AudioComponent::outputTo(AudioComponent* other)
 	other->ins.push_back(this);
 }
 
-

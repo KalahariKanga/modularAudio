@@ -38,3 +38,13 @@ void Component::link(std::string name, Component* other, std::string othername)
 	l.second = other->getParameter(othername);
 	links.push_back(l);
 }
+
+void Component::noteDown()
+{
+
+}
+
+void Component::noteUp()
+{
+
+}

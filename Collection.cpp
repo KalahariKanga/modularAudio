@@ -15,7 +15,10 @@ Collection::~Collection()
 void Collection::update()
 {
 	for (auto c : components)
+	{
 		(c.second)->needUpdate = 1;
+		(c.second)->note = note;
+	}
 
 	outputComponent->update();
 
@@ -42,4 +45,16 @@ void Collection::linkCV(std::string from, std::string param1, std::string to, st
 	Component* a = components.at(from);
 	Component* b = components.at(to);
 	a->link(param1, b, param2);
+}
+
+void Collection::noteDown()
+{
+	for (auto c : components)
+		(c.second)->noteDown();
+}
+
+void Collection::noteUp()
+{
+	for (auto c : components)
+		(c.second)->noteUp();
 }

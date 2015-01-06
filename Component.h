@@ -18,6 +18,8 @@ public:
 	int startn;
 	Note note;
 	bool needUpdate;
+	virtual void noteDown();
+	virtual void noteUp();
 	
 };
 

@@ -19,5 +19,8 @@ public:
 	void addComponent(std::string name, std::string type);
 	void linkAudio(std::string from, std::string to);
 	void linkCV(std::string from, std::string param1, std::string to, std::string param2);
+	void noteDown();
+	void noteUp();
+	Note note;
 };
 
