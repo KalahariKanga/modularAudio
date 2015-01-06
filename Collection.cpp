@@ -3,6 +3,8 @@
 
 Collection::Collection()
 {
+	outputComponent = new AudioOutput();
+	components.insert(std::pair<std::string,Component*>("output", outputComponent));
 }
 
 
@@ -12,7 +14,14 @@ Collection::~Collection()
 
 void Collection::update()
 {
-	
+	for (auto c : components)
+		(c.second)->needUpdate = 1;
+
+	outputComponent->update();
+
+	for (auto c : components)
+		if ((c.second)->needUpdate)
+			(c.second)->update();
 }
 
 void Collection::addComponent(std::string name, std::string type)

@@ -30,6 +30,7 @@ void AudioComponent::update()
 		i->update();
 
 	render();
+	needUpdate = 0;
 }
 
 void AudioComponent::outputTo(AudioComponent* other)

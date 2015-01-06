@@ -14,6 +14,7 @@ public:
 	Collection();
 	~Collection();
 	std::map<std::string, Component*> components;
+	Component* outputComponent;
 	void update();
 	void addComponent(std::string name, std::string type);
 	void linkAudio(std::string from, std::string to);

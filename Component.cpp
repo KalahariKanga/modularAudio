@@ -18,6 +18,7 @@ void Component::update()
 		l.second->value = convertToRange(l.first->value, l.first->min, l.first->max, l.second->min, l.second->max);
 	}
 	render();
+	needUpdate = 0;
 }
 
 void Component::render()
