@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioComponent.h"
 class LFO :
-	public AudioComponent
+	public Component
 {
 public:
 	LFO();

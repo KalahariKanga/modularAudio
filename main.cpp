@@ -39,16 +39,18 @@ int main(int argc, char** argv[])
 	{
 		lfo.update();
 		audiooutput.update();
-		if (rand() % 50 == 0)
+		if (rand() % 100 == 0)
 		{
-			//osc.note = Note((Notes)(rand() % 108), 128);
+			
 			if (which)
 			{
+				
 				which = 0;
 				ampenv.noteUp();
 			}
 			else
 			{
+				osc.note = Note((Notes)(rand() % 108), 128);
 				which = 1;
 				ampenv.noteDown();
 			}

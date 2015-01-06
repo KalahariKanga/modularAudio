@@ -37,15 +37,4 @@ void AudioComponent::outputTo(AudioComponent* other)
 	other->ins.push_back(this);
 }
 
-Parameter* AudioComponent::getParameter(std::string name)
-{
-	return parameters.at(name);
-}
 
-void AudioComponent::link(std::string name, AudioComponent* other, std::string othername)
-{
-	std::pair<Parameter*, Parameter*> l;
-	l.first = getParameter(name);
-	l.second = other->getParameter(othername);
-	links.push_back(l);
-}
