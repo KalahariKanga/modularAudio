@@ -21,6 +21,7 @@ public:
 	void linkCV(std::string from, std::string param1, std::string to, std::string param2);
 	void noteDown();
 	void noteUp();
+	bool isIdle();
 	Note note;
 };
 

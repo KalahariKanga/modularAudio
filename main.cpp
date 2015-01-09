@@ -1,4 +1,4 @@
-#include "Collection.h"
+#include "Synth.h"
 
 
 int main(int argc, char** argv[])
@@ -12,16 +12,7 @@ int main(int argc, char** argv[])
 	BASS_ChannelPlay(stream, 0);
 
 
-	/*AdditiveOscillator osc;
-	AmpEnvelope ampenv;
-	AudioOutput audiooutput;
-	LFO lfo;
-
-	osc.outputTo(&ampenv);
-	ampenv.outputTo(&audiooutput);
-	lfo.link("lfo", &osc, "amount1");
-	lfo.link("lfo", &osc, "amount3");
-	lfo.link("lfo", &osc, "amount5");*/
+	
 	Collection collection;
 	collection.addComponent("osc", "AdditiveOscillator");
 	collection.addComponent("ampenv", "AmpEnvelope");

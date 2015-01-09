@@ -28,3 +28,11 @@ void AudioBuffer::zero()
 	for (int c = 0; c < BUFFER_LENGTH; c++)
 		data[c] = 0;
 }
+
+bool AudioBuffer::isZero()
+{
+	for (int c = 0; c < BUFFER_LENGTH; c++)
+		if (data[c] != 0)
+			return 0;
+	return 1;
+}

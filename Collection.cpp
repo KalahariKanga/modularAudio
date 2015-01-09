@@ -58,3 +58,10 @@ void Collection::noteUp()
 	for (auto c : components)
 		(c.second)->noteUp();
 }
+
+bool Collection::isIdle()
+{
+	if (((AudioComponent*)outputComponent)->buffer.isZero())
+		return 1;
+	return 0;
+}

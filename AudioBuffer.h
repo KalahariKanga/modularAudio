@@ -8,5 +8,6 @@ public:
 	short* data;
 	short& operator[](int i);
 	void zero();
+	bool isZero();
 };
 
