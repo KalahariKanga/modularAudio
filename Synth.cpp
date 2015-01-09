@@ -19,6 +19,10 @@ void Synth::update()
 {
 	for (auto c : collections)
 		c->update();
+	buffer.zero();
+	for (auto c : collections)
+		for (int t = 0; t < BUFFER_LENGTH; t++)
+			buffer.data[t] += ((AudioComponent*)(c->outputComponent))->buffer.data[t];
 }
 
 void Synth::addComponent(std::string name, std::string type)
@@ -49,6 +53,7 @@ void Synth::noteDown(Note note)
 		{
 			c->note = note;
 			c->noteDown();
+			return;
 		}
 	//if all components are active
 }

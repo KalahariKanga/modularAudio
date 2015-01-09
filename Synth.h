@@ -7,6 +7,7 @@ public:
 	~Synth();
 	std::vector<Collection*> collections;
 	const int polyphony = 8;
+	AudioBuffer buffer;
 	void update();
 	void addComponent(std::string name, std::string type);
 	void linkAudio(std::string from, std::string to);
