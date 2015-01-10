@@ -17,12 +17,18 @@ Synth::~Synth()
 
 void Synth::update()
 {
+	activeNotes = 0;
 	for (auto c : collections)
+	{
 		c->update();
+		if (!c->isIdle())
+			activeNotes++;
+	}
 	buffer.zero();
 	for (auto c : collections)
 		for (int t = 0; t < BUFFER_LENGTH; t++)
 			buffer.data[t] += ((AudioComponent*)(c->outputComponent))->buffer.data[t];
+	
 }
 
 void Synth::addComponent(std::string name, std::string type)

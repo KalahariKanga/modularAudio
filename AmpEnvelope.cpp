@@ -29,10 +29,6 @@ void AmpEnvelope::render()
 
 float AmpEnvelope::envelope(int c)
 {
-	/*float v = 1 - (float)((n - startn)*BUFFER_LENGTH + c) / 44100;
-	if (v >= 0)
-		return v;
-	return 0;*/
 
 	if (state == 1)//note down
 	{

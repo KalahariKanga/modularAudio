@@ -1,5 +1,6 @@
 #include "Synth.h"
-
+#include <chrono>
+#include <thread>
 
 int main(int argc, char** argv[])
 {
@@ -10,6 +11,9 @@ int main(int argc, char** argv[])
 
 	stream = BASS_StreamCreate(SAMPLE_RATE, 1, 0, STREAMPROC_PUSH, NULL);
 	BASS_ChannelPlay(stream, 0);
+
+	
+
 
 	srand(time(0));
 
@@ -23,29 +27,18 @@ int main(int argc, char** argv[])
 	synth.linkAudio("ampenv", "output");
 	
 	short* output = synth.buffer.data;
-	
+	std::chrono::time_point<std::chrono::system_clock> start, end;
 	AudioComponent::n = 0;
 	while (1)
 	{
+		
+		start = std::chrono::system_clock::now();
 		synth.update();
-		/*if (rand() % 100 == 0)
-		{
-			
-			if (which)
-			{
-				
-				which = 0;
-				collection.noteUp();
-			}
-			else
-			{
-				collection.note = Note((Notes)(rand() % 108), 128);
-				which = 1;
-				collection.noteDown();
-			}
-			
-		}*/
-		if (AudioComponent::n % 100 == 50)
+		end = std::chrono::system_clock::now();
+		std::chrono::duration<double> elapsed_seconds = end - start;
+		//std::cout << elapsed_seconds.count() << std::endl;
+
+		if (AudioComponent::n % 75 == 50)
 			synth.noteDown(Note((Notes)(rand() % 60 + 20), 100));
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};
 		BASS_StreamPutData(stream, (void*)output, BUFFER_LENGTH*sizeof(short));

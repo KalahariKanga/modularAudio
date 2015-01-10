@@ -26,7 +26,7 @@ double AdditiveOscillator::getSample(double pos)
 {
 	
 	double value = 0;
-	for (int c = 0; c < 64; c++)
+	for (int c = 0; c < 16; c++)
 		value += amount[c].value * sin((c+1)*pos);
 	return value;
 }
