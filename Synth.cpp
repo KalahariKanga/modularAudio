@@ -37,6 +37,14 @@ void Synth::addComponent(std::string name, std::string type)
 		c->addComponent(name, type);
 }
 
+void Synth::setParameter(std::string component, std::string parameter, float value)
+{
+	for (auto c : collections)
+	{
+		c->setParameter(component, parameter, value);
+	}
+}
+
 void Synth::linkAudio(std::string from, std::string to)
 {
 	for (auto c : collections)

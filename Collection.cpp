@@ -33,6 +33,13 @@ void Collection::addComponent(std::string name, std::string type)
 	components.insert(std::pair<std::string, Component*>(name, c));
 }
 
+void Collection::setParameter(std::string component, std::string parameter, float value)
+{
+	Parameter* p = components.at(component)->parameters.at(parameter);
+	float v = convertToRange(value, 0, 1, p->min, p->max);
+	p->value = v;
+}
+
 void Collection::linkAudio(std::string from, std::string to)
 {
 	Component* a = components.at(from);
