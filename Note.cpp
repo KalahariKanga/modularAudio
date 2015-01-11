@@ -15,3 +15,9 @@ Note::Note(Notes n, int v)
 Note::~Note()
 {
 }
+
+void Note::updateFrequency()
+{
+	frequency = 440 * (pow(pow(2, (double)1 / 12), note - a3));
+}
+

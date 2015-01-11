@@ -9,6 +9,6 @@ public:
 	Notes note;
 	int frequency;
 	int velocity;
-
+	void updateFrequency();
 };
 

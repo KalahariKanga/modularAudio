@@ -22,7 +22,7 @@ int main(int argc, char** argv[])
 	synth.addComponent("osc", "AdditiveOscillator");
 	synth.addComponent("ampenv", "AmpEnvelope");
 	synth.addComponent("lfo", "LFO");
-	synth.linkCV("lfo", "lfo", "osc", "amount1");
+	synth.linkCV("lfo", "lfo", "osc", "semitones");
 	synth.linkAudio("osc", "ampenv");
 	synth.linkAudio("ampenv", "output");
 	

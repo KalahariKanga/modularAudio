@@ -8,5 +8,6 @@ public:
 	~Oscillator();
 	void render();
 	virtual double getSample(double pos) = 0;
+	Parameter octaves, semitones;
 };
 
