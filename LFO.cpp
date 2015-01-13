@@ -16,5 +16,5 @@ LFO::~LFO()
 
 void LFO::render()
 {
-	value.value = sin(((double)(BUFFER_LENGTH*n) / SAMPLE_RATE) * 2 * PI * freq.value);
+	value.setValue(sin(((double)(BUFFER_LENGTH*n) / SAMPLE_RATE) * 2 * PI * freq.getValue()));
 }

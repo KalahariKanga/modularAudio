@@ -37,7 +37,13 @@ void Collection::setParameter(std::string component, std::string parameter, floa
 {
 	Parameter* p = components.at(component)->parameters.at(parameter);
 	float v = convertToRange(value, 0, 1, p->min, p->max);
-	p->value = v;
+	p->setValue(value);
+}
+
+void Collection::setParameterRaw(std::string component, std::string parameter, float value)
+{
+	Parameter* p = components.at(component)->parameters.at(parameter);
+	p->setValue(value);
 }
 
 void Collection::linkAudio(std::string from, std::string to)

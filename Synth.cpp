@@ -45,6 +45,14 @@ void Synth::setParameter(std::string component, std::string parameter, float val
 	}
 }
 
+void Synth::setParameterRaw(std::string component, std::string parameter, float value)
+{
+	for (auto c : collections)
+	{
+		c->setParameterRaw(component, parameter, value);
+	}
+}
+
 void Synth::linkAudio(std::string from, std::string to)
 {
 	for (auto c : collections)

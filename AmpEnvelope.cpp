@@ -36,14 +36,14 @@ float AmpEnvelope::envelope(int c)
 		
 		float timeElapsed = (float)((n - startn)*BUFFER_LENGTH + c) / SAMPLE_RATE;
 		//attack phase
-		if (timeElapsed <= a.value)
-			return timeElapsed / a.value;
+		if (timeElapsed <= a.getValue())
+			return timeElapsed / a.getValue();
 		//decay phase
-		else if (timeElapsed > a.value && timeElapsed <= a.value + d.value)
-			return 1 - ((timeElapsed - a.value)*(1 - s.value)) / d.value;
+		else if (timeElapsed > a.getValue() && timeElapsed <= a.getValue() + d.getValue())
+			return 1 - ((timeElapsed - a.getValue())*(1 - s.getValue())) / d.getValue();
 		//sustain
-		else if (timeElapsed > a.value + d.value)
-			return s.value;
+		else if (timeElapsed > a.getValue() + d.getValue())
+			return s.getValue();
 
 		
 	}
@@ -53,9 +53,9 @@ float AmpEnvelope::envelope(int c)
 		
 		float timeElapsed = (float)((n - startn)*BUFFER_LENGTH + c) / SAMPLE_RATE;
 		releaseTime = timeElapsed - upTime;
-		if (releaseTime >= r.value)
+		if (releaseTime >= r.getValue())
 			return 0;
-		return s.value*(1 - releaseTime / r.value);
+		return s.getValue()*(1 - releaseTime / r.getValue());
 		
 
 		
