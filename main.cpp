@@ -19,10 +19,11 @@ int main(int argc, char** argv[])
 
 	Synth synth;
 	Collection collection;
-	synth.addComponent("osc", "AdditiveOscillator");
+	synth.addComponent("osc", "SimpleOscillator");
 	synth.addComponent("ampenv", "AmpEnvelope");
 	synth.addComponent("lfo", "LFO");
-	synth.linkCV("lfo", "lfo", "osc", "semitones");
+	//synth.linkCV("lfo", "lfo", "osc", "pulseWidth");
+	synth.setParameterRaw("osc", "waveform", 1);
 	synth.linkAudio("osc", "ampenv");
 	synth.linkAudio("ampenv", "output");
 	
