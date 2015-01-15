@@ -23,9 +23,8 @@ void AudioComponent::update()
 {
 	for (auto l : links)
 	{
-		l.second->setValue(convertToRange(l.first->getValue(), l.first->min, l.first->max, l.second->min, l.second->max));
+		l.update();
 	}
-
 	for (auto i : ins)
 		i->update();
 
