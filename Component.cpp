@@ -31,9 +31,10 @@ Parameter* Component::getParameter(std::string name)
 	return parameters.at(name);
 }
 
-void Component::link(std::string name, Component* other, std::string othername)
+void Component::link(std::string name, Component* other, std::string othername, float amount)
 {
-	links.push_back(Link(getParameter(name), other->getParameter(othername),1));
+	Link l(getParameter(name), other->getParameter(othername), amount);
+	links.push_back(l);
 }
 
 void Component::noteDown()

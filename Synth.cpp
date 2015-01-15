@@ -59,10 +59,10 @@ void Synth::linkAudio(std::string from, std::string to)
 		c->linkAudio(from, to);
 }
 
-void Synth::linkCV(std::string from, std::string param1, std::string to, std::string param2)
+void Synth::linkCV(std::string from, std::string param1, std::string to, std::string param2, float amount)
 {
 	for (auto c : collections)
-		c->linkCV(from, param1, to, param2);
+		c->linkCV(from, param1, to, param2, amount);
 }
 
 void Synth::noteDown(Note note)

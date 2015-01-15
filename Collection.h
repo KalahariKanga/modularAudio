@@ -20,7 +20,7 @@ public:
 	void setParameter(std::string component, std::string parameter, float value);
 	void setParameterRaw(std::string component, std::string parameter, float value);
 	void linkAudio(std::string from, std::string to);
-	void linkCV(std::string from, std::string param1, std::string to, std::string param2);
+	void linkCV(std::string from, std::string param1, std::string to, std::string param2, float amount);
 	void noteDown();
 	void noteUp();
 	bool isIdle();

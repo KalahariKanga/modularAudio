@@ -22,8 +22,8 @@ int main(int argc, char** argv[])
 	synth.addComponent("osc", "SimpleOscillator");
 	synth.addComponent("ampenv", "AmpEnvelope");
 	synth.addComponent("lfo", "LFO");
-	//synth.linkCV("lfo", "lfo", "osc", "pulseWidth");
-	synth.setParameterRaw("osc", "waveform", 1);
+	synth.linkCV("lfo", "lfo", "osc", "semitones",0.5);
+	synth.setParameterRaw("osc", "waveform", 0);
 	synth.linkAudio("osc", "ampenv");
 	synth.linkAudio("ampenv", "output");
 	

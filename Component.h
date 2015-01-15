@@ -15,7 +15,7 @@ public:
 	Parameter* getParameter(std::string);
 	virtual void update();
 	virtual void render();
-	void link(std::string name, Component* other, std::string othername);
+	void link(std::string name, Component* other, std::string othername, float amount);
 	static int n;
 	int startn;
 	Note note;

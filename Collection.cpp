@@ -37,13 +37,13 @@ void Collection::setParameter(std::string component, std::string parameter, floa
 {
 	Parameter* p = components.at(component)->parameters.at(parameter);
 	float v = convertToRange(value, 0, 1, p->min, p->max);
-	p->setValue(value);
+	p->setBaseValue(value);
 }
 
 void Collection::setParameterRaw(std::string component, std::string parameter, float value)
 {
 	Parameter* p = components.at(component)->parameters.at(parameter);
-	p->setValue(value);
+	p->setBaseValue(value);
 }
 
 void Collection::linkAudio(std::string from, std::string to)
@@ -53,11 +53,11 @@ void Collection::linkAudio(std::string from, std::string to)
 	((AudioComponent*)a)->outputTo((AudioComponent*)b);
 }
 
-void Collection::linkCV(std::string from, std::string param1, std::string to, std::string param2)
+void Collection::linkCV(std::string from, std::string param1, std::string to, std::string param2, float amount)
 {
 	Component* a = components.at(from);
 	Component* b = components.at(to);
-	a->link(param1, b, param2);
+	a->link(param1, b, param2, amount);
 }
 
 void Collection::noteDown()
