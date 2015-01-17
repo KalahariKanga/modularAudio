@@ -60,6 +60,7 @@ float AmpEnvelope::envelope(int c)
 
 		
 	}
+	return 0;
 }
 
 void AmpEnvelope::noteDown()

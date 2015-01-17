@@ -14,7 +14,7 @@ public:
 	void outputTo(AudioComponent* other);
 	
 	AudioBuffer buffer;
-	
+	Parameter output;
 	
 };
 

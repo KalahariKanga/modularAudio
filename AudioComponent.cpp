@@ -1,9 +1,12 @@
 #include "AudioComponent.h"
+#include <climits>
 
 int AudioComponent::n;
 AudioComponent::AudioComponent()
 {
 	startn = n;
+	output.create(0, SHRT_MIN, SHRT_MAX, 1);
+	parameters.insert(std::pair<std::string, Parameter*>("output", &output));
 }
 
 
@@ -29,6 +32,8 @@ void AudioComponent::update()
 		i->update();
 
 	render();
+	float v = (buffer[0] + buffer[BUFFER_LENGTH / 3] + buffer[2 * BUFFER_LENGTH / 3]) / 3;
+	output.setBaseValue(v);
 	needUpdate = 0;
 }
 

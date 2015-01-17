@@ -32,6 +32,7 @@ double SimpleOscillator::getSample(double pos)
 		return triangle(pos, pulseWidth.getValue());
 		break;
 	}
+	return 0;
 }
 
 float SimpleOscillator::square(float t, float pw)
@@ -42,6 +43,8 @@ float SimpleOscillator::square(float t, float pw)
 
 float SimpleOscillator::triangle(float t, float pw)
 {
+	if (pw == 0)
+		pw = 1;
 	t = fmod((double)t, (double)2 * PI);
 	if (t < pw * 2 * PI)
 		return (t / (pw*PI)) - 1;
