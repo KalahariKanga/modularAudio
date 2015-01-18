@@ -14,6 +14,7 @@ public:
 	Collection();
 	~Collection();
 	std::map<std::string, Component*> components;
+	std::vector<Link> links;
 	Component* outputComponent;
 	void update();
 	void addComponent(std::string name, std::string type);

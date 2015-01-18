@@ -14,6 +14,11 @@ Collection::~Collection()
 
 void Collection::update()
 {
+	for (auto l : links)
+	{
+		l.update();
+	}
+
 	for (auto c : components)
 	{
 		(c.second)->needUpdate = 1;
@@ -51,13 +56,15 @@ void Collection::linkAudio(std::string from, std::string to)
 	Component* a = components.at(from);
 	Component* b = components.at(to);
 	((AudioComponent*)a)->outputTo((AudioComponent*)b);
+
 }
 
 void Collection::linkCV(std::string from, std::string param1, std::string to, std::string param2, float amount)
 {
 	Component* a = components.at(from);
 	Component* b = components.at(to);
-	a->link(param1, b, param2, amount);
+	Link link(a->getParameter(param1), b->getParameter(param2), amount);
+	links.push_back(link);
 }
 
 void Collection::noteDown()

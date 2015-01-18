@@ -24,10 +24,7 @@ void AudioComponent::render()
 
 void AudioComponent::update()
 {
-	for (auto l : links)
-	{
-		l.update();
-	}
+	
 	for (auto i : ins)
 		i->update();
 
