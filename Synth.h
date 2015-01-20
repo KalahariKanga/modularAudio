@@ -1,5 +1,7 @@
 #pragma once
 #include "Collection.h"
+#include "SFML/graphics.hpp"
+
 class Synth
 {
 public:
@@ -8,6 +10,7 @@ public:
 	std::vector<Collection*> collections;
 	const int polyphony = 16;
 	AudioBuffer buffer;
+	void handleInput();
 	void update();
 	void addComponent(std::string name, std::string type);
 	void setParameter(std::string component, std::string parameter, float value);
@@ -17,5 +20,7 @@ public:
 	void noteDown(Note note);
 	void noteUp(Note note);
 	int activeNotes;
+
+	sf::RenderWindow window;
 };
 

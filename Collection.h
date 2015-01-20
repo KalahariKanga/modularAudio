@@ -26,5 +26,6 @@ public:
 	void noteUp();
 	bool isIdle();
 	Note note;
+	int noteState; //0 up 1 down
 };
 

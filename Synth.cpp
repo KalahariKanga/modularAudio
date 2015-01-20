@@ -8,6 +8,8 @@ Synth::Synth()
 		collections.push_back(new Collection);
 		//something something delete...
 	}
+	window.create(sf::VideoMode(64, 64), "modularAudio");
+	window.setKeyRepeatEnabled(0);
 }
 
 
@@ -17,6 +19,7 @@ Synth::~Synth()
 
 void Synth::update()
 {
+	handleInput();
 	activeNotes = 0;
 	for (auto c : collections)
 	{
@@ -28,7 +31,7 @@ void Synth::update()
 	for (auto c : collections)
 		for (int t = 0; t < BUFFER_LENGTH; t++)
 			buffer.data[t] += ((AudioComponent*)(c->outputComponent))->buffer.data[t];
-	
+	window.display();
 }
 
 void Synth::addComponent(std::string name, std::string type)
@@ -68,7 +71,7 @@ void Synth::linkCV(std::string from, std::string param1, std::string to, std::st
 void Synth::noteDown(Note note)
 {
 	for (auto c : collections)
-		if (c->note.note == note.note)
+		if (c->note.note == note.note && c->noteState == 1)
 			return;
 	for (auto c : collections)
 		if (c->isIdle())
@@ -85,4 +88,21 @@ void Synth::noteUp(Note note)
 	for (auto c : collections)
 		if (c->note.note == note.note)
 			c->noteUp();
+}
+
+void Synth::handleInput()
+{
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		if (event.type == sf::Event::KeyPressed)
+		{
+			noteDown(Note(event.key.code, 100));
+		}
+		if (event.type == sf::Event::KeyReleased)
+		{
+			noteUp(Note(event.key.code,100));
+		}
+	}
+
 }

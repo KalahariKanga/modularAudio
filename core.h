@@ -6,14 +6,14 @@
 #include <map>
 #include <string>
 #include <ctime> //only because <chrono> seems a bit hefty
-
+#include <SFML/Graphics.hpp>
 #define SAMPLE_RATE 48000
 #define BUFFER_LENGTH 512
 #define PI 3.14159265358979323846
 
 enum Notes
 {
-	cm2, csm2, dm2, dsm2, em2, fm2, fsm2, gm2, gsm2, am2, asm2, bm2,
+	NONOTE = 0, cm2, csm2, dm2, dsm2, em2, fm2, fsm2, gm2, gsm2, am2, asm2, bm2,
 	cm1, csm1, dm1, dsm1, em1, fm1, fsm1, gm1, gsm1, am1, asm1, bm1,
 	c0, cs0, d0, ds0, e0, f0, fs0, g0, gs0, a0, as0, b0,
 	c1, cs1, d1, ds1, e1, f1, fs1, g1, gs1, a1, as1, b1,

@@ -5,6 +5,7 @@ Collection::Collection()
 {
 	outputComponent = new AudioOutput();
 	components.insert(std::pair<std::string,Component*>("output", outputComponent));
+	noteState = 0;
 }
 
 
@@ -30,6 +31,9 @@ void Collection::update()
 	for (auto c : components)
 		if ((c.second)->needUpdate)
 			(c.second)->update();
+	
+	if (isIdle())
+		note = Note(NONOTE, 0);
 }
 
 void Collection::addComponent(std::string name, std::string type)
@@ -71,12 +75,14 @@ void Collection::noteDown()
 {
 	for (auto c : components)
 		(c.second)->noteDown();
+	noteState = 1;
 }
 
 void Collection::noteUp()
 {
 	for (auto c : components)
 		(c.second)->noteUp();
+	noteState = 0;
 }
 
 bool Collection::isIdle()

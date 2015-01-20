@@ -22,7 +22,7 @@ int main(int argc, char** argv[])
 	synth.addComponent("osc", "SimpleOscillator");
 	synth.addComponent("ampenv", "AmpEnvelope");
 	synth.addComponent("lfo", "LFO");
-	synth.linkCV("lfo", "lfo", "osc", "semitones",1);
+	//synth.linkCV("lfo", "lfo", "osc", "semitones",1);
 	synth.setParameterRaw("osc", "waveform", 0);
 	synth.setParameterRaw("lfo", "frequency", 0.5);
 	synth.linkAudio("osc", "ampenv");
@@ -40,8 +40,8 @@ int main(int argc, char** argv[])
 		std::chrono::duration<double> elapsed_seconds = end - start;
 		//std::cout << elapsed_seconds.count() << std::endl;
 
-		if (AudioComponent::n % 75 == 50)
-			synth.noteDown(Note((Notes)(rand() % 60 + 20), 100));
+		//if (AudioComponent::n % 75 == 50)
+		//	synth.noteDown(Note((Notes)(rand() % 60 + 20), 100));
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};
 		BASS_StreamPutData(stream, (void*)output, BUFFER_LENGTH*sizeof(short));
 		AudioComponent::n++;
