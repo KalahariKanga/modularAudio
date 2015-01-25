@@ -3,7 +3,7 @@
 class Delay :
 	public AudioComponent
 {
-	float* myBuffer;
+	std::vector<float> myBuffer;
 	int bufferLength, pos;
 	float get();
 	void set(float v);

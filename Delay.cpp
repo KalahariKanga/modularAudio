@@ -13,15 +13,13 @@ Delay::Delay(float delayTime)
 	parameters.insert(std::pair<std::string, Parameter*>("wet", &wet));
 	
 	bufferLength = delayTime * SAMPLE_RATE;
-	myBuffer = new float[bufferLength];
-	for (int c = 0; c < bufferLength; c++)
-		myBuffer[c] = 0;
+	myBuffer.insert(myBuffer.begin(), bufferLength, 0);
 }
 
 
 Delay::~Delay()
 {
-	delete[] myBuffer;
+
 }
 
 float Delay::get()
