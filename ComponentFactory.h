@@ -4,6 +4,7 @@
 #include "AdditiveOscillator.h"
 #include "AudioOutput.h"
 #include "LFO.h"
+#include "Delay.h"
 
 class ComponentFactory
 {

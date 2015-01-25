@@ -41,7 +41,7 @@ float Parameter::getValue()
 void Parameter::setBaseValue(float value)
 {
 	this->baseValue = value;
-	if (readOnly)
+	//if (readOnly)
 		this->value = value;
 }
 

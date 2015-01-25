@@ -25,5 +25,7 @@ Component* ComponentFactory::makeComponent(std::string type)
 		return new AudioOutput();
 	if (type == "SimpleOscillator")
 		return new SimpleOscillator();
+	if (type == "Delay")
+		return new Delay();
 	return nullptr;
 }

@@ -3,7 +3,7 @@
 
 AmpEnvelope::AmpEnvelope()
 {
-	a.create(0.1, 0, 10);
+	a.create(0.01, 0, 10);
 	d.create(0, 0, 10);
 	s.create(1, 0, 1);
 	r.create(0.5, 0, 10);
