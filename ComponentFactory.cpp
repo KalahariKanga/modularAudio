@@ -27,5 +27,7 @@ Component* ComponentFactory::makeComponent(std::string type)
 		return new SimpleOscillator();
 	if (type == "Delay")
 		return new Delay();
+	if (type == "Filter")
+		return new Filter();
 	return nullptr;
 }

@@ -23,12 +23,14 @@ int main(int argc, char** argv[])
 	synth.addComponent("ampenv", "AmpEnvelope");
 	synth.addComponent("lfo", "LFO");
 	synth.addComponent("delay", "Delay");
-	//synth.linkCV("lfo", "lfo", "osc", "semitones",1);
+	synth.addComponent("filter", "Filter");
+	synth.linkCV("lfo", "lfo", "filter", "freq",0.3);
 	synth.setParameterRaw("osc", "waveform", 2);
 	synth.setParameterRaw("lfo", "frequency", 0.5);
 	synth.linkAudio("osc", "ampenv");
 	synth.linkAudio("ampenv", "delay");
-	synth.linkAudio("delay", "output");
+	synth.linkAudio("delay", "filter");
+	synth.linkAudio("filter", "output");
 	
 	short* output = synth.buffer.data;
 	std::chrono::time_point<std::chrono::system_clock> start, end;

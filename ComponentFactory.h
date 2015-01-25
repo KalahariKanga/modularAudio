@@ -5,6 +5,7 @@
 #include "AudioOutput.h"
 #include "LFO.h"
 #include "Delay.h"
+#include "Filter.h"
 
 class ComponentFactory
 {
