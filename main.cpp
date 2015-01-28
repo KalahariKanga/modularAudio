@@ -20,14 +20,15 @@ int main(int argc, char** argv[])
 	Synth synth;
 	Collection collection;
 	synth.addComponent("osc", "SimpleOscillator");
+	synth.addComponent("noise", "NoiseOscillator");
 	synth.addComponent("ampenv", "AmpEnvelope");
 	synth.addComponent("lfo", "LFO");
 	synth.addComponent("delay", "Delay");
 	synth.addComponent("filter", "Filter");
 	synth.linkCV("lfo", "lfo", "filter", "freq",0.3);
-	synth.setParameterRaw("osc", "waveform", 2);
+	synth.setParameterRaw("osc", "waveform", 1);
 	synth.setParameterRaw("lfo", "frequency", 0.5);
-	synth.linkAudio("osc", "ampenv");
+	synth.linkAudio("noise", "ampenv");
 	synth.linkAudio("ampenv", "delay");
 	synth.linkAudio("delay", "filter");
 	synth.linkAudio("filter", "output");

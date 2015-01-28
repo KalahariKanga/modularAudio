@@ -29,5 +29,7 @@ Component* ComponentFactory::makeComponent(std::string type)
 		return new Delay();
 	if (type == "Filter")
 		return new Filter();
+	if (type == "NoiseOscillator")
+		return new NoiseOscillator();
 	return nullptr;
 }

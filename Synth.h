@@ -4,6 +4,9 @@
 
 class Synth
 {
+	sf::Texture tex;
+	sf::Image image;
+	sf::Sprite sprite;
 public:
 	Synth();
 	~Synth();

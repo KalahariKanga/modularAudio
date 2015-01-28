@@ -8,8 +8,10 @@ Synth::Synth()
 		collections.push_back(new Collection);
 		//something something delete...
 	}
-	window.create(sf::VideoMode(64, 64), "modularAudio");
+	window.create(sf::VideoMode(512, 64), "modularAudio");
 	window.setKeyRepeatEnabled(0);
+	
+	image.create(512, 64);
 }
 
 
@@ -31,6 +33,20 @@ void Synth::update()
 	for (auto c : collections)
 		for (int t = 0; t < BUFFER_LENGTH; t++)
 			buffer.data[t] += ((AudioComponent*)(c->outputComponent))->buffer.data[t];
+
+	//clear screen
+	for (int cx = 0; cx < 512; cx++)
+		for (int cy = 0; cy<64; cy++)
+			image.setPixel(cx, cy, sf::Color(0, 0, 0));
+
+	//draw waveform
+	for (int c = 0; c < BUFFER_LENGTH; c++)
+		if (abs(buffer[c] / 16) < 32)
+			image.setPixel(((float)c / BUFFER_LENGTH) * 512, 32 + buffer[c] / 16, sf::Color(255, 255, 255));
+
+	tex.loadFromImage(image);
+	sprite.setTexture(tex);
+	window.draw(sprite);
 	window.display();
 }
 

@@ -4,7 +4,7 @@
 Filter::Filter()
 {
 	type.create(1, 0, 1);
-	freq.create(440, 20, SAMPLE_RATE / 20);
+	freq.create(220, 20, SAMPLE_RATE / 20);
 	q.create(0.6, 0.001, 1);
 	parameters.insert(std::pair<std::string, Parameter*>("type", &type));
 	parameters.insert(std::pair<std::string, Parameter*>("freq", &freq));
@@ -56,7 +56,7 @@ void Filter::calcCoeffs()
 
 void Filter::render()
 {
-	calcCoeffs();
+	calcCoeffs(); //TODO: this must be kinda slow
 	buffer.zero();
 	for (auto i : ins)
 	{

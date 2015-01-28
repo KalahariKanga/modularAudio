@@ -6,6 +6,7 @@
 #include "LFO.h"
 #include "Delay.h"
 #include "Filter.h"
+#include "NoiseOscillator.h"
 
 class ComponentFactory
 {
