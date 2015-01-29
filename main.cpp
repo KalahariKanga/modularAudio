@@ -25,9 +25,16 @@ int main(int argc, char** argv[])
 	synth.addComponent("lfo", "LFO");
 	synth.addComponent("delay", "Delay");
 	synth.addComponent("filter", "Filter");
-	synth.linkCV("lfo", "lfo", "filter", "freq",0.3);
+
+
+	synth.linkCV("lfo", "lfo", "delay", "length",0.3);
+
+
 	synth.setParameterRaw("osc", "waveform", 1);
 	synth.setParameterRaw("lfo", "frequency", 0.5);
+
+
+	synth.linkAudio("osc", "ampenv");
 	synth.linkAudio("noise", "ampenv");
 	synth.linkAudio("ampenv", "delay");
 	synth.linkAudio("delay", "filter");

@@ -3,7 +3,6 @@
 
 Parameter::Parameter()
 {
-
 }
 
 Parameter::Parameter(float value, float min, float max)

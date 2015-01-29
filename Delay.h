@@ -9,11 +9,11 @@ class Delay :
 	void set(float v);
 	float processSample(float d, float w);
 	AudioBuffer temp;
+	float previousLength;
 public:
 	Delay();
-	Delay(float delayTime);
 	~Delay();
-	Parameter gain, feedback, dry, wet;
+	Parameter gain, feedback, dry, wet, length;
 	void render();
 };
 

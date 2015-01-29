@@ -1,18 +1,18 @@
 #include "Delay.h"
 
-Delay::Delay() : Delay(0.3)
-{}
-Delay::Delay(float delayTime)
+Delay::Delay()
 {
 	//gain.create()
 	feedback.create(0.4, 0, 1);
 	dry.create(0.8, 0, 1);
 	wet.create(0.5, 0, 1);
+	length.create(0.3, 0, 2);
 	parameters.insert(std::pair<std::string, Parameter*>("feedback", &feedback));
 	parameters.insert(std::pair<std::string, Parameter*>("dry", &dry));
 	parameters.insert(std::pair<std::string, Parameter*>("wet", &wet));
+	parameters.insert(std::pair<std::string, Parameter*>("length", &length));
 	
-	bufferLength = delayTime * SAMPLE_RATE;
+	bufferLength = length.getValue() * SAMPLE_RATE;
 	myBuffer.insert(myBuffer.begin(), bufferLength, 0);
 }
 
@@ -55,4 +55,12 @@ void Delay::render()
 		set(temp[c]);
 		buffer.data[c] = processSample(temp[c], delaySample);
 	}
+	if (previousLength != length.getValue())
+	{
+		bufferLength = length.getValue() * SAMPLE_RATE;
+		myBuffer.resize(bufferLength);
+		if (pos >= bufferLength)
+			pos = 0;
+	}
+	previousLength = length.getValue();
 }
