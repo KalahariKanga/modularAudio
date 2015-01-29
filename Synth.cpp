@@ -113,11 +113,15 @@ void Synth::handleInput()
 	{
 		if (event.type == sf::Event::KeyPressed)
 		{
-			noteDown(Note(event.key.code, 100));
+			Note n(event.key.code, 1);
+			if (n.note != NONOTE)
+				noteDown(n);
 		}
 		if (event.type == sf::Event::KeyReleased)
 		{
-			noteUp(Note(event.key.code,100));
+			Note n(event.key.code, 1);
+			if (n.note != NONOTE)
+				noteUp(n);
 		}
 	}
 

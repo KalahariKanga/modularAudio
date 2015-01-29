@@ -6,6 +6,7 @@ Collection::Collection()
 	outputComponent = new AudioOutput();
 	components.insert(std::pair<std::string,Component*>("output", outputComponent));
 	noteState = 0;
+	note.velocity = 0;
 }
 
 
