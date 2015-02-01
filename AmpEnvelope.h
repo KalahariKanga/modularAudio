@@ -6,6 +6,7 @@ class AmpEnvelope :
 	float envelope(int c);
 	float upTime;//time at which note is released
 	short state;
+	float releaseValue, v = 0;
 public:
 	AmpEnvelope();
 	~AmpEnvelope();

@@ -7,6 +7,11 @@ AmpEnvelope::AmpEnvelope()
 	d.create(0, 0, 10);
 	s.create(1, 0, 1);
 	r.create(0.5, 0, 10);
+	parameters.insert(std::pair<std::string, Parameter*>("a", &a));
+	parameters.insert(std::pair<std::string, Parameter*>("d", &d));
+	parameters.insert(std::pair<std::string, Parameter*>("s", &s));
+	parameters.insert(std::pair<std::string, Parameter*>("r", &r));
+
 	state = 2;
 }
 
@@ -29,7 +34,6 @@ void AmpEnvelope::render()
 
 float AmpEnvelope::envelope(int c)
 {
-
 	if (state == 1)//note down
 	{
 		upTime = ((float)(n - startn + 1)*BUFFER_LENGTH) / SAMPLE_RATE;//time passed at the end of this chunk
@@ -37,15 +41,16 @@ float AmpEnvelope::envelope(int c)
 		float timeElapsed = (float)((n - startn)*BUFFER_LENGTH + c) / SAMPLE_RATE;
 		//attack phase
 		if (timeElapsed <= a.getValue())
-			return timeElapsed / a.getValue();
+			v = timeElapsed / a.getValue();
 		//decay phase
 		else if (timeElapsed > a.getValue() && timeElapsed <= a.getValue() + d.getValue())
-			return 1 - ((timeElapsed - a.getValue())*(1 - s.getValue())) / d.getValue();
+			v = 1 - ((timeElapsed - a.getValue())*(1 - s.getValue())) / d.getValue();
 		//sustain
 		else if (timeElapsed > a.getValue() + d.getValue())
-			return s.getValue();
+			v = s.getValue();
 
-		
+		releaseValue = v;
+		return v;
 	}
 	if (state == 2)//note up
 	{
@@ -55,7 +60,7 @@ float AmpEnvelope::envelope(int c)
 		releaseTime = timeElapsed - upTime;
 		if (releaseTime >= r.getValue())
 			return 0;
-		return s.getValue()*(1 - releaseTime / r.getValue());
+		return v*(1 - releaseTime / r.getValue());
 		
 
 		
