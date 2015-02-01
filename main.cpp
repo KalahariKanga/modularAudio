@@ -19,24 +19,28 @@ int main(int argc, char** argv[])
 
 	Synth synth;
 	Collection collection;
-	synth.addComponent("osc", "SimpleOscillator");
-	synth.addComponent("noise", "NoiseOscillator");
-	synth.addComponent("ampenv", "AmpEnvelope");
-	synth.addComponent("lfo", "LFO");
+	synth.addComponent("osc1", "SimpleOscillator");
+	synth.addComponent("osc2", "SimpleOscillator");
+	synth.addComponent("ampenv1", "AmpEnvelope");
+	synth.addComponent("ampenv2", "AmpEnvelope");
+	synth.addComponent("env", "Envelope");
 	synth.addComponent("delay", "Delay");
-	synth.addComponent("filter", "Filter");
+	synth.addComponent("filter", "Filter");	
 
+	synth.addComponent("lfo", "LFO");
 
-	synth.linkCV("lfo", "lfo", "delay", "length",0.3);
+	synth.setParameterRaw("lfo", "freq", 0.5);
+	synth.setParameterRaw("osc1", "waveform", 2);
+	synth.setParameterRaw("osc2", "waveform", 0);
+	synth.setParameterRaw("ampenv1", "a", 0.1f);
+	synth.setParameterRaw("ampenv2", "a", 0.1f);
 
-
-	synth.setParameterRaw("osc", "waveform", 1);
-	synth.setParameterRaw("lfo", "frequency", 0.5);
-
-
-	synth.linkAudio("osc", "ampenv");
-	synth.linkAudio("noise", "ampenv");
-	synth.linkAudio("ampenv", "delay");
+	synth.linkCV("lfo", "value", "osc1", "pulseWidth", 0.5);
+	synth.linkCV("env", "value", "osc1", "semitones", 0.5);
+	synth.linkAudio("osc1", "ampenv1");
+	synth.linkAudio("osc2", "ampenv2");
+	synth.linkAudio("ampenv1", "delay");
+	synth.linkAudio("ampenv2", "delay");
 	synth.linkAudio("delay", "filter");
 	synth.linkAudio("filter", "output");
 	

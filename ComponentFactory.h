@@ -7,6 +7,7 @@
 #include "Delay.h"
 #include "Filter.h"
 #include "NoiseOscillator.h"
+#include "Envelope.h"
 
 class ComponentFactory
 {

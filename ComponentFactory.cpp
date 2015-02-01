@@ -31,5 +31,7 @@ Component* ComponentFactory::makeComponent(std::string type)
 		return new Filter();
 	if (type == "NoiseOscillator")
 		return new NoiseOscillator();
+	if (type == "Envelope")
+		return new Envelope();
 	return nullptr;
 }
