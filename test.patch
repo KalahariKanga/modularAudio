@@ -1,0 +1,13 @@
+4
+osc SimpleOscillator
+ampenv AmpEnvelope
+delay Delay
+lfo LFO
+3
+osc ampenv
+ampenv delay
+delay output
+1
+lfo value osc waveform 1.0
+1
+lfo freq 0.4

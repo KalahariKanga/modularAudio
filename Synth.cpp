@@ -1,5 +1,6 @@
 #include "Synth.h"
-
+#include <iostream>
+#include <fstream>
 
 Synth::Synth()
 {
@@ -125,4 +126,47 @@ void Synth::handleInput()
 		}
 	}
 
+}
+
+void Synth::loadPatch(std::string fname)
+{
+	std::ifstream stream;
+	stream.open(fname);
+	//components
+	int n;
+	stream >> n;
+	for (int c = 0; c < n; c++)
+	{
+		std::string name, type;
+		stream >> name;
+		stream >> type;
+		addComponent(name, type);
+	}
+	//audio links
+	stream >> n;
+	for (int c = 0; c < n; c++)
+	{
+		std::string from, to;
+		stream >> from;
+		stream >> to;
+		linkAudio(from, to);
+	}
+	//cv links
+	stream >> n;
+	for (int c = 0; c < n; c++)
+	{
+		std::string from, param1, to, param2;
+		float amount;
+		stream >> from >> param1 >> to >> param2 >> amount;
+		linkCV(from, param1, to, param2, amount);
+	}
+	//set raw parameters
+	stream >> n;
+	for (int c = 0; c < n; c++)
+	{
+		std::string component, param;
+		float value;
+		stream >> component >> param >> value;
+		setParameterRaw(component, param, value);
+	}
 }

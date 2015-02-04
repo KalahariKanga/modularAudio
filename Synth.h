@@ -24,6 +24,8 @@ public:
 	void noteUp(Note note);
 	int activeNotes;
 
+	void savePatch(std::string fname);
+	void loadPatch(std::string fname);
 	sf::RenderWindow window;
 };
 
