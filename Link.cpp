@@ -6,11 +6,13 @@ Link::Link()
 	amount = 0;
 }
 
-Link::Link(Parameter* from, Parameter* to, float amount)
+Link::Link(std::string fromComponent, Parameter* from, std::string toComponent, Parameter* to, float amount)
 {
 	this->from = from;
 	this->to = to;
 	this->amount = amount;
+	this->fromComponent = fromComponent;
+	this->toComponent = toComponent;
 }
 Link::~Link()
 {

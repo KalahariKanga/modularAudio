@@ -5,10 +5,8 @@ int AudioComponent::n;
 AudioComponent::AudioComponent()
 {
 	startn = n;
-	output.create(0, SHRT_MIN, SHRT_MAX, 1);
-	gain.create(0, -1, 1);
-	parameters.insert(std::pair<std::string, Parameter*>("output", &output));
-	parameters.insert(std::pair<std::string, Parameter*>("gain", &gain));
+	addParameter(&output, "output", 0, SHRT_MIN, SHRT_MAX, 1);
+	addParameter(&gain, "gain", 0, -1, 1);
 }
 
 

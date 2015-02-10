@@ -22,6 +22,8 @@ public:
 	bool needUpdate;
 	virtual void noteDown();
 	virtual void noteUp();
-	
+	std::string name;
+
+	void addParameter(Parameter* param, std::string name, float value, float min, float max, bool readOnly = 0);
 };
 

@@ -16,8 +16,9 @@ Parameter::~Parameter()
 {
 }
 
-void Parameter::create(float value, float min, float max, bool readOnly)
+void Parameter::create(std::string name, float value, float min, float max, bool readOnly)
 {
+	this->name = name;
 	this->baseValue = value;
 	this->value = value;
 	this->min = min;

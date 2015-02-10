@@ -3,12 +3,9 @@
 
 Filter::Filter()
 {
-	type.create(1, 0, 1);
-	freq.create(220, 20, SAMPLE_RATE / 20);
-	q.create(0.6, 0.001, 1);
-	parameters.insert(std::pair<std::string, Parameter*>("type", &type));
-	parameters.insert(std::pair<std::string, Parameter*>("freq", &freq));
-	parameters.insert(std::pair<std::string, Parameter*>("q", &q));
+	addParameter(&type, "type", 1, 0, 1);
+	addParameter(&freq, "freq", 220, 20, SAMPLE_RATE / 20);
+	addParameter(&q, "q", 0.6, 0.001, 1);
 	zx[0] = 0;
 	zx[1] = 0;
 	zy[0] = 0;

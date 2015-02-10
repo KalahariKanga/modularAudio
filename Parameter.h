@@ -7,9 +7,9 @@ public:
 	Parameter();
 	Parameter(float value, float min, float max);
 	~Parameter();
-	std::string name;//?
+	std::string name;
 	float min, max;
-	void create(float value, float min, float max, bool readOnly = 0);
+	void create(std::string name, float value, float min, float max, bool readOnly = 0);
 	void setValue(float value);
 	void setBaseValue(float value);
 	float getValue();

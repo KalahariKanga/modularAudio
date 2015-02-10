@@ -3,10 +3,9 @@
 
 Oscillator::Oscillator()
 {
-	octaves.create(0, -4, 4);
-	semitones.create(0, 0, 12);
-	parameters.insert(std::pair<std::string, Parameter*>("octaves", &octaves));
-	parameters.insert(std::pair<std::string, Parameter*>("semitones", &semitones));
+	
+	addParameter(&octaves, "octaves", 0, -4, 4);
+	addParameter(&semitones, "semitones", 0, 0, 12);
 }
 
 

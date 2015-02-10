@@ -3,11 +3,8 @@
 
 SimpleOscillator::SimpleOscillator()
 {
-	waveform.create(0, 0, 3);
-	pulseWidth.create(0.5, 0, 1);
-	parameters.insert(std::pair<std::string, Parameter*>("waveform", &waveform));
-	parameters.insert(std::pair<std::string, Parameter*>("pulseWidth", &pulseWidth));
-
+	addParameter(&waveform, "waveform", 0, 0, 3);
+	addParameter(&pulseWidth, "pulseWidth", 0.5, 0, 1);
 }
 
 

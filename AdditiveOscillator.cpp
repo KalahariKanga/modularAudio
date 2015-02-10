@@ -5,11 +5,7 @@ AdditiveOscillator::AdditiveOscillator()
 {
 	for (int c = 0; c < 64; c++)
 	{
-		amount[c].setValue(0);
-		amount[c].min = 0;
-		amount[c].max = 1;
-		std::string name = "amount" + std::to_string(c);
-		parameters.insert(std::pair<std::string, Parameter*>(name, &amount[c]));
+		addParameter(&amount[c], "amount" + std::to_string(c), 0, 0, 1);
 	}
 	amount[0].setValue(1);
 	amount[2].setValue(0.5);

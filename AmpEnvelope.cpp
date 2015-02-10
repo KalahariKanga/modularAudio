@@ -3,15 +3,10 @@
 
 AmpEnvelope::AmpEnvelope()
 {
-	a.create(0.01, 0, 10);
-	d.create(0, 0, 10);
-	s.create(1, 0, 1);
-	r.create(0.5, 0, 10);
-	parameters.insert(std::pair<std::string, Parameter*>("a", &a));
-	parameters.insert(std::pair<std::string, Parameter*>("d", &d));
-	parameters.insert(std::pair<std::string, Parameter*>("s", &s));
-	parameters.insert(std::pair<std::string, Parameter*>("r", &r));
-
+	addParameter(&a, "a", 0.001, 0, 10);
+	addParameter(&d, "d", 0, 0, 10);
+	addParameter(&s, "s", 1, 0, 1);
+	addParameter(&r, "r", 0.5, 0, 10);
 	state = 2;
 }
 

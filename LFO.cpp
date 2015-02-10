@@ -3,10 +3,8 @@
 
 LFO::LFO()
 {
-	value.create(0, -1, 1, 1);
-	freq.create(2, 0, 20);
-	parameters.insert(std::pair<std::string, Parameter*>("value", &value));
-	parameters.insert(std::pair<std::string, Parameter*>("freq", &freq));
+	addParameter(&value, "value", 0, -1, 1, 1);
+	addParameter(&freq, "freq", 2, 0, 20);
 }
 
 

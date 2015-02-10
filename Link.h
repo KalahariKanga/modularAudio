@@ -4,8 +4,9 @@ class Link
 {
 public:
 	Link();
-	Link(Parameter* from, Parameter* to, float amount);
+	Link::Link(std::string fromComponent, Parameter* from, std::string toComponent, Parameter* to, float amount);
 	~Link();
+	std::string fromComponent, toComponent;
 	Parameter* from;
 	Parameter* to;
 	float amount;

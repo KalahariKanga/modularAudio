@@ -5,6 +5,7 @@ Collection::Collection()
 {
 	outputComponent = new AudioOutput();
 	components.insert(std::pair<std::string,Component*>("output", outputComponent));
+	outputComponent->name = "output";
 	noteState = 0;
 	note.velocity = 0;
 }
@@ -41,6 +42,7 @@ void Collection::addComponent(std::string name, std::string type)
 {
 	Component* c = ComponentFactory::makeComponent(type);
 	components.insert(std::pair<std::string, Component*>(name, c));
+	c->name = name;
 }
 
 void Collection::setParameter(std::string component, std::string parameter, float value)
@@ -68,7 +70,7 @@ void Collection::linkCV(std::string from, std::string param1, std::string to, st
 {
 	Component* a = components.at(from);
 	Component* b = components.at(to);
-	Link link(a->getParameter(param1), b->getParameter(param2), amount);
+	Link link(a->name, a->getParameter(param1), b->name, b->getParameter(param2), amount);
 	links.push_back(link);
 }
 
