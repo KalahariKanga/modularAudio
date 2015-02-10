@@ -7,17 +7,15 @@ int main(int argc, char** argv[])
 	BASS_Init(-1, SAMPLE_RATE, 0, 0, NULL);
 	BASS_SetConfig(BASS_CONFIG_BUFFER, 128);
 	BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD, 10);
-	HSTREAM stream;
-
-	stream = BASS_StreamCreate(SAMPLE_RATE, 1, 0, STREAMPROC_PUSH, NULL);
+	HSTREAM stream = BASS_StreamCreate(SAMPLE_RATE, 1, 0, STREAMPROC_PUSH, NULL);
 	BASS_ChannelPlay(stream, 0);
 
 	srand(time(0));
 
 	Synth synth;
-	//Collection collection;
 	
-	synth.loadPatch("test.patch");
+	synth.loadPatch("test.out");
+	//synth.savePatch("test.out");
 	short* output = synth.buffer.data;
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	AudioComponent::n = 0;

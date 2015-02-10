@@ -138,8 +138,7 @@ void Synth::loadPatch(std::string fname)
 	for (int c = 0; c < n; c++)
 	{
 		std::string name, type;
-		stream >> name;
-		stream >> type;
+		stream >> name >> type;
 		addComponent(name, type);
 	}
 	//audio links
@@ -147,8 +146,7 @@ void Synth::loadPatch(std::string fname)
 	for (int c = 0; c < n; c++)
 	{
 		std::string from, to;
-		stream >> from;
-		stream >> to;
+		stream >> from >> to;
 		linkAudio(from, to);
 	}
 	//cv links
@@ -168,5 +166,65 @@ void Synth::loadPatch(std::string fname)
 		float value;
 		stream >> component >> param >> value;
 		setParameterRaw(component, param, value);
+	}
+}
+
+void Synth::savePatch(std::string fname)
+{
+	std::ofstream stream;
+	stream.open(fname);
+	//components
+	int n = collections[0]->components.size() - 1; //to account for AudioOutput
+	stream << n << std::endl;
+	for (auto c : collections[0]->components)
+	{
+		//remove leading "class "
+		std::string classname = std::string(typeid(*c.second).name()).erase(0,6);
+
+		if (classname != "AudioOutput")
+			stream << c.first << " " << classname << std::endl;
+	}
+
+	//audio links
+	n = 0;
+	for (auto c : collections[0]->components)
+	{
+		if (dynamic_cast<AudioComponent*>(c.second))
+		{
+			n += (dynamic_cast<AudioComponent*>(c.second))->ins.size();
+		}
+	}
+	stream << n << std::endl;
+	for (auto c : collections[0]->components)
+	{
+		if (dynamic_cast<AudioComponent*>(c.second))
+		{
+			for (auto d : (dynamic_cast<AudioComponent*>(c.second))->ins)
+			{
+				stream << d->name << " " << c.second->name << std::endl;
+			}
+		}
+	}
+	//cv links
+	n = collections[0]->links.size();
+	stream << n << std::endl;
+	for (auto c : collections[0]->links)
+	{
+		stream << c.fromComponent << " " << c.from->name << " ";
+		stream << c.toComponent << " " << c.to->name << " " << c.amount << " \n";
+	}
+	//raw parameters
+	n = 0;
+	for (auto c : collections[0]->components)
+	{
+		n += c.second->parameters.size();
+	}
+	stream << n << std::endl;
+	for (auto c : collections[0]->components)
+	{
+		for (auto d : c.second->parameters)
+		{
+			stream << c.second->name << " " << d.first << " " << d.second->getBaseValue() << "\n";
+		}
 	}
 }
