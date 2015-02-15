@@ -1,13 +1,20 @@
-4
-osc SimpleOscillator
+5
+osc1 SimpleOscillator
+osc2 SimpleOscillator
 ampenv AmpEnvelope
 delay Delay
 lfo LFO
-3
-osc ampenv
+4
+osc1 ampenv
+osc2 ampenv
 ampenv delay
 delay output
-1
-lfo value osc waveform 1.0
-1
+0
+7
+osc1 pulseWidth 0.2
+osc1 waveform 1
+osc2 waveform 0
+osc2 octaves -1
 lfo freq 0.4
+delay length 1
+delay feedback 0.4

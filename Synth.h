@@ -1,19 +1,16 @@
 #pragma once
 #include "Collection.h"
-#include "SFML/graphics.hpp"
+
 
 class Synth
 {
-	sf::Texture tex;
-	sf::Image image;
-	sf::Sprite sprite;
+	
 public:
 	Synth();
 	~Synth();
 	std::vector<Collection*> collections;
 	const int polyphony = 16;
 	AudioBuffer buffer;
-	void handleInput();
 	void update();
 	void addComponent(std::string name, std::string type);
 	void setParameter(std::string component, std::string parameter, float value);
@@ -26,6 +23,6 @@ public:
 
 	void savePatch(std::string fname);
 	void loadPatch(std::string fname);
-	sf::RenderWindow window;
+	
 };
 

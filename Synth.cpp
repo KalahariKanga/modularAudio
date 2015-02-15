@@ -9,12 +9,8 @@ Synth::Synth()
 		collections.push_back(new Collection);
 		//something something delete...
 	}
-	window.create(sf::VideoMode(512, 64), "modularAudio");
-	window.setKeyRepeatEnabled(0);
 	
-	image.create(512, 64);
 }
-
 
 Synth::~Synth()
 {
@@ -22,7 +18,6 @@ Synth::~Synth()
 
 void Synth::update()
 {
-	handleInput();
 	activeNotes = 0;
 	for (auto c : collections)
 	{
@@ -34,21 +29,6 @@ void Synth::update()
 	for (auto c : collections)
 		for (int t = 0; t < BUFFER_LENGTH; t++)
 			buffer.data[t] += ((AudioComponent*)(c->outputComponent))->buffer.data[t];
-
-	//clear screen
-	for (int cx = 0; cx < 512; cx++)
-		for (int cy = 0; cy<64; cy++)
-			image.setPixel(cx, cy, sf::Color(0, 0, 0));
-
-	//draw waveform
-	for (int c = 0; c < BUFFER_LENGTH; c++)
-		if (abs(buffer[c] / 16) < 32)
-			image.setPixel(((float)c / BUFFER_LENGTH) * 512, 32 + buffer[c] / 16, sf::Color(255, 255, 255));
-
-	tex.loadFromImage(image);
-	sprite.setTexture(tex);
-	window.draw(sprite);
-	window.display();
 }
 
 void Synth::addComponent(std::string name, std::string type)
@@ -105,27 +85,6 @@ void Synth::noteUp(Note note)
 	for (auto c : collections)
 		if (c->note.note == note.note)
 			c->noteUp();
-}
-
-void Synth::handleInput()
-{
-	sf::Event event;
-	while (window.pollEvent(event))
-	{
-		if (event.type == sf::Event::KeyPressed)
-		{
-			Note n(event.key.code, 1);
-			if (n.note != NONOTE)
-				noteDown(n);
-		}
-		if (event.type == sf::Event::KeyReleased)
-		{
-			Note n(event.key.code, 1);
-			if (n.note != NONOTE)
-				noteUp(n);
-		}
-	}
-
 }
 
 void Synth::loadPatch(std::string fname)

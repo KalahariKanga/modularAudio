@@ -6,6 +6,7 @@ Oscillator::Oscillator()
 	
 	addParameter(&octaves, "octaves", 0, -4, 4);
 	addParameter(&semitones, "semitones", 0, 0, 12);
+
 }
 
 

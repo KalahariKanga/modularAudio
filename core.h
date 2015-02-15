@@ -1,12 +1,12 @@
 #pragma once
-#include "bass.h"
+
 #include <cmath>
 #include <vector>
 #include <iostream>
 #include <map>
 #include <string>
 #include <ctime> //only because <chrono> seems a bit hefty
-#include <SFML/Graphics.hpp>
+
 #define SAMPLE_RATE 48000
 #define BUFFER_LENGTH 512
 #define PI 3.14159265358979323846

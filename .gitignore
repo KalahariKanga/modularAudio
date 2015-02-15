@@ -233,3 +233,4 @@ $RECYCLE.BIN/
 #Mine
 *.vcxproj
 *.filters
+*.tlog

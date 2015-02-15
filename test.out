@@ -1,15 +1,16 @@
-4
+5
 ampenv AmpEnvelope
 delay Delay
 lfo LFO
-osc SimpleOscillator
-3
-osc ampenv
+osc1 SimpleOscillator
+osc2 SimpleOscillator
+4
+osc1 ampenv
+osc2 ampenv
 ampenv delay
 delay output
-1
-lfo value osc waveform 1 
-22
+0
+28
 ampenv a 0.001
 ampenv d 0
 ampenv gain 0
@@ -19,16 +20,22 @@ ampenv s 1
 delay dry 0.8
 delay feedback 0.4
 delay gain 0
-delay length 0.3
+delay length 1
 delay output 0
 delay wet 0.5
 lfo freq 0.4
 lfo value 0
-osc gain 0
-osc octaves 0
-osc output 0
-osc pulseWidth 0.5
-osc semitones 0
-osc waveform 0
+osc1 gain 0
+osc1 octaves 0
+osc1 output 0
+osc1 pulseWidth 0.2
+osc1 semitones 0
+osc1 waveform 1
+osc2 gain 0
+osc2 octaves -1
+osc2 output 0
+osc2 pulseWidth 0.5
+osc2 semitones 0
+osc2 waveform 0
 output gain 0
 output output 0
