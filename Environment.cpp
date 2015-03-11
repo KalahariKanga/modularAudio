@@ -38,4 +38,5 @@ void Environment::update()
 		for (int c = 0; c < BUFFER_LENGTH; c++)
 			buffer[c] += s->getBuffer()[c];
 	}
+	AudioComponent::n++;
 }

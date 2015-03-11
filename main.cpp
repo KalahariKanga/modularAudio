@@ -25,19 +25,19 @@ int main(int argc, char** argv[])
 
 	srand(time(0));
 
-	Synth synth;
+	Environment e;
+	Synth* s = e.addSynth("skies.patch");
 	
-	synth.loadPatch("skies.patch");
-	//synth.savePatch("test.out");
-	short* output = synth.getBuffer();
+	
+	short* output = e.getBuffer();
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	AudioComponent::n = 0;
 	while (1)
 	{
 		
 		start = std::chrono::system_clock::now();
-		synth.update();
-		update(&synth);
+		e.update();
+		update(s);
 		end = std::chrono::system_clock::now();
 		std::chrono::duration<double> elapsed_seconds = end - start;
 		//std::cout << elapsed_seconds.count() << std::endl;
@@ -46,7 +46,7 @@ int main(int argc, char** argv[])
 
 		while (BASS_StreamPutData(stream, NULL, 0) > 10){};
 		BASS_StreamPutData(stream, (void*)output, BUFFER_LENGTH*sizeof(short));
-		AudioComponent::n++;
+		
 	}
 
 	BASS_StreamFree(stream);
