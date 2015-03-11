@@ -87,6 +87,11 @@ void Synth::noteUp(Note note)
 			c->noteUp();
 }
 
+short* Synth::getBuffer()
+{
+	return buffer.data;
+}
+
 void Synth::loadPatch(std::string fname)
 {
 	std::ifstream stream;

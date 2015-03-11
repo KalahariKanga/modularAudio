@@ -1,4 +1,4 @@
-#include "Synth.h"
+#include "Environment.h"
 #include <chrono>
 #include <thread>
 #include "SFML/graphics.hpp"
@@ -27,9 +27,9 @@ int main(int argc, char** argv[])
 
 	Synth synth;
 	
-	synth.loadPatch("test.patch");
-	synth.savePatch("test.out");
-	short* output = synth.buffer.data;
+	synth.loadPatch("skies.patch");
+	//synth.savePatch("test.out");
+	short* output = synth.getBuffer();
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	AudioComponent::n = 0;
 	while (1)
@@ -79,8 +79,8 @@ void update(Synth* s)
 
 	//draw waveform
 	for (int c = 0; c < BUFFER_LENGTH; c++)
-		if (abs(s->buffer[c] / 16) < 32)
-			image.setPixel(((float)c / BUFFER_LENGTH) * 512, 32 + s->buffer[c] / 16, sf::Color(255, 255, 255));
+		if (abs((s->getBuffer())[c] / 16) < 32)
+			image.setPixel(((float)c / BUFFER_LENGTH) * 512, 32 + (s->getBuffer())[c] / 16, sf::Color(255, 255, 255));
 
 	tex.loadFromImage(image);
 	sprite.setTexture(tex);

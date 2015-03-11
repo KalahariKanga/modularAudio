@@ -1,0 +1,34 @@
+8
+osc1 SimpleOscillator
+osc2 SimpleOscillator
+osc3 SimpleOscillator
+del1 Delay
+del2 Delay
+env1 AmpEnvelope
+env2 AmpEnvelope
+env3 AmpEnvelope
+8
+osc1 env1
+osc2 env2
+osc3 env3
+env1 output
+env2 del1
+env3 del2
+del1 output
+del2 output
+0
+14
+osc1 waveform 1
+osc2 waveform 1
+osc2 semitones 7
+osc3 waveform 1
+osc3 semitones 7
+osc3 octaves 1
+del1 length 0.125
+del1 dry 0
+del1 wet 1
+del1 feedback 0.75
+del2 length 0.25
+del2 dry 0
+del2 wet 1
+del2 feedback 0.3

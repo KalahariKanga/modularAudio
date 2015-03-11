@@ -1,6 +1,6 @@
 #pragma once
 #include "core.h"
-class Note
+class __declspec(dllexport) Note
 {
 public:
 	Note();

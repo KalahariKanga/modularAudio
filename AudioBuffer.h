@@ -1,6 +1,6 @@
 #pragma once
 #include "core.h"
-class AudioBuffer
+class __declspec(dllexport) AudioBuffer //TODO: really shouldnt have to do this
 {
 public:
 	AudioBuffer();
