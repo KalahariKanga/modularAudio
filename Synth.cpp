@@ -9,6 +9,9 @@ Synth::Synth()
 		collections.push_back(new Collection);
 		//something something delete...
 	}
+
+	for (int c = 0; c < 100; c++)
+		noteUpTimer[c] = -1;
 	
 }
 
@@ -29,6 +32,17 @@ void Synth::update()
 	for (auto c : collections)
 		for (int t = 0; t < BUFFER_LENGTH; t++)
 			buffer.data[t] += ((AudioComponent*)(c->outputComponent))->buffer.data[t];
+
+	//release any queued notes
+	for (int c = 0; c < 100; c++)
+	{
+		if (noteUpTimer[c] > 0)
+		{
+			noteUpTimer[c] -= (float)BUFFER_LENGTH / SAMPLE_RATE;
+			if (noteUpTimer[c] <= 0)
+				noteUp(Note((Notes)c, 0));
+		}
+	}
 }
 
 void Synth::addComponent(std::string name, std::string type)
@@ -191,4 +205,10 @@ void Synth::savePatch(std::string fname)
 			stream << c.second->name << " " << d.first << " " << d.second->getBaseValue() << "\n";
 		}
 	}
+}
+
+void Synth::playNoteDuration(Note note, float seconds)
+{
+	noteDown(note);
+	noteUpTimer[(int)note.note] = seconds;
 }

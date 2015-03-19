@@ -3,6 +3,7 @@
 
 Environment::Environment()
 {
+	
 }
 
 
@@ -31,12 +32,16 @@ short* Environment::getBuffer()
 void Environment::update()
 {
 	buffer.zero();
+	//update synths
 	for (auto s : synths)
 		s->update();
+	//collate buffers
 	for (auto s : synths)
 	{
 		for (int c = 0; c < BUFFER_LENGTH; c++)
 			buffer[c] += s->getBuffer()[c];
 	}
+	
 	AudioComponent::n++;
 }
+

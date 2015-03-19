@@ -1,3 +1,22 @@
+4
+osc SimpleOscillator
+env AmpEnvelope
+noise NoiseOscillator
+filter Filter
+4
+osc env
+noise env
+env filter
+filter output
+0
+6
+osc octaves -3
+osc waveform 0
+env a 0.01
+env d 0.25
+env s 0
+env r 0
+
 5
 osc1 SimpleOscillator
 osc2 SimpleOscillator

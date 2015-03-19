@@ -5,6 +5,7 @@ class __declspec(dllexport) Environment
 {
 	std::vector<Synth*> synths;
 	AudioBuffer buffer;
+	
 public:
 	Environment();
 	~Environment();
@@ -13,5 +14,6 @@ public:
 	Synth* addSynth(std::string filename);
 	short* getBuffer();
 	void update();
+
 };
 

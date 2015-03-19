@@ -7,6 +7,7 @@ class __declspec(dllexport) Synth
 	std::vector<Collection*> collections;
 	const int polyphony = 16;
 	AudioBuffer buffer;
+	float noteUpTimer[100];
 public:
 	Synth();
 	~Synth();
@@ -23,6 +24,7 @@ public:
 	short* getBuffer();
 	void savePatch(std::string fname);
 	void loadPatch(std::string fname);
-	
+	void playNoteDuration(Note note, float seconds);
+
 };
 

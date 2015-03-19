@@ -32,6 +32,7 @@ int main(int argc, char** argv[])
 	short* output = e.getBuffer();
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	AudioComponent::n = 0;
+	s->playNoteDuration(Note(c3, 100), 3);
 	while (1)
 	{
 		
@@ -44,7 +45,7 @@ int main(int argc, char** argv[])
 
 		
 
-		while (BASS_StreamPutData(stream, NULL, 0) > 10){};
+		while (BASS_StreamPutData(stream, NULL, 0) > 10);
 		BASS_StreamPutData(stream, (void*)output, BUFFER_LENGTH*sizeof(short));
 		
 	}
