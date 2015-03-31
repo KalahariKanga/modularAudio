@@ -13,6 +13,7 @@ class __declspec(dllexport) Environment
 	int tickLength;
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	std::map<int, Synth*> synthMap;
+	void(*midiEventCallback)(MidiEvent) = nullptr;
 public:
 	Environment();
 	~Environment();
@@ -24,5 +25,6 @@ public:
 	void loadMidiFile(std::string fname);
 	void assignMidiTrack(int track, Synth* s);
 	void playMidiFile();
+	void setMidiEventCallback(void (*func)(MidiEvent));
 };
 

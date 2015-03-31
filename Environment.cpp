@@ -47,7 +47,9 @@ void Environment::update()
 					int v = midifile[t][midiEventCount[t]].getP2();
 					if (synthMap.find(t) != synthMap.end())
 						synthMap[t]->noteDown(Note(n, v));
-					std::cout << "Note down!" << n << "\n";
+					//std::cout << "Note down!" << n << "\n";
+					if (midiEventCallback)
+						midiEventCallback(midifile[t][midiEventCount[t]]);
 				}
 				if (midifile[t][midiEventCount[t]].isNoteOff())
 				{
@@ -55,7 +57,9 @@ void Environment::update()
 					int v = midifile[t][midiEventCount[t]].getP2();
 					if (synthMap.find(t) != synthMap.end())
 						synthMap[t]->noteUp(Note(n, v));
-					std::cout << "Note up!\n";
+					//std::cout << "Note up!\n";
+					if (midiEventCallback)
+						midiEventCallback(midifile[t][midiEventCount[t]]);
 				}
 				midiEventCount[t]++;
 			}
@@ -96,4 +100,8 @@ void Environment::playMidiFile()
 	midifile.absoluteTicks();
 	tickLength = 60000 / (midifile.getTicksPerQuarterNote() * 120);
 	start = std::chrono::system_clock::now();
+}
+void Environment::setMidiEventCallback(void(*func)(MidiEvent))
+{
+	midiEventCallback = func;
 }
