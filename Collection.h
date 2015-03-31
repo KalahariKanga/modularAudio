@@ -9,6 +9,7 @@
 
 class Collection
 {
+	bool idle;
 public:
 	
 	Collection();
@@ -25,6 +26,7 @@ public:
 	void noteDown();
 	void noteUp();
 	bool isIdle();
+	void setIdle(bool i);
 	Note note;
 	int noteState; //0 up 1 down
 };

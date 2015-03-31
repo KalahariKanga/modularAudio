@@ -87,6 +87,7 @@ void Synth::noteDown(Note note)
 	for (auto c : collections)
 		if (c->isIdle())
 		{
+			c->setIdle(0);
 			c->note = note;
 			c->noteDown();
 			return;

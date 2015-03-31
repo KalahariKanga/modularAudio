@@ -34,6 +34,10 @@ void Collection::update()
 		if ((c.second)->needUpdate)
 			(c.second)->update();
 	
+	idle = 0;
+	if (((AudioComponent*)outputComponent)->buffer.isZero())
+		idle = 1;
+	
 	if (isIdle())
 		note = Note(NONOTE, 0);
 }
@@ -90,7 +94,10 @@ void Collection::noteUp()
 
 bool Collection::isIdle()
 {
-	if (((AudioComponent*)outputComponent)->buffer.isZero())
-		return 1;
-	return 0;
+	return idle;	
+}
+
+void Collection::setIdle(bool i)
+{
+	idle = i;
 }

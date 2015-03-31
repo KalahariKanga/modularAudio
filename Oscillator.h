@@ -3,6 +3,7 @@
 class Oscillator :
 	public AudioComponent
 {
+	int phase;
 public:
 	Oscillator();
 	~Oscillator();

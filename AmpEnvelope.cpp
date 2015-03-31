@@ -3,10 +3,10 @@
 
 AmpEnvelope::AmpEnvelope()
 {
-	addParameter(&a, "a", 0.001, 0, 10);
-	addParameter(&d, "d", 0, 0, 10);
-	addParameter(&s, "s", 1, 0, 1);
-	addParameter(&r, "r", 0.5, 0, 10);
+	addParameter(&a, "a", 0.01, 0, 10);
+	addParameter(&d, "d", 0.1, 0, 10);
+	addParameter(&s, "s", 0.8, 0, 1);
+	addParameter(&r, "r", 0.1, 0, 10);
 	state = 2;
 }
 
