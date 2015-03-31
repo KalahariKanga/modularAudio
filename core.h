@@ -6,6 +6,9 @@
 #include <map>
 #include <string>
 #include <ctime> //only because <chrono> seems a bit hefty
+#include <chrono> //so i snapped...
+
+
 
 #define SAMPLE_RATE 48000
 #define BUFFER_LENGTH 512

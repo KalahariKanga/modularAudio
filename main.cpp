@@ -3,6 +3,7 @@
 #include <thread>
 #include "SFML/graphics.hpp"
 #include "bass.h"
+
 sf::Texture tex;
 sf::Image image;
 sf::Sprite sprite;
@@ -26,13 +27,36 @@ int main(int argc, char** argv[])
 	srand(time(0));
 
 	Environment e;
-	Synth* s = e.addSynth("skies.patch");
+	Synth* s = e.addSynth();
+	s->addComponent("osc", "SimpleOscillator");
+	s->addComponent("env", "AmpEnvelope");
+	s->linkAudio("osc", "env");
+	s->linkAudio("env", "output");
 	
+	Synth* s1 = e.addSynth();
+	s1->addComponent("osc", "SimpleOscillator");
+	s1->addComponent("env", "AmpEnvelope");
+	s1->linkAudio("osc", "env");
+	s1->linkAudio("env", "output");
+	s1->setParameterRaw("osc", "waveform", 1);
+
+	Synth* s2 = e.addSynth();
+	s2->addComponent("osc", "SimpleOscillator");
+	s2->addComponent("env", "AmpEnvelope");
+	s2->linkAudio("osc", "env");
+	s2->linkAudio("env", "output");
+	s2->setParameterRaw("osc", "waveform", 1);
 	
 	short* output = e.getBuffer();
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	AudioComponent::n = 0;
-	s->playNoteDuration(Note(c3, 100), 3);
+	//s->playNoteDuration(Note(c3, 100), 3);
+	e.loadMidiFile("tithe.mid");
+	e.assignMidiTrack(0, s);
+	e.assignMidiTrack(1, s1);
+	e.assignMidiTrack(2, s);
+	e.assignMidiTrack(3, s2);
+	e.playMidiFile();
 	while (1)
 	{
 		
