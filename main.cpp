@@ -32,6 +32,8 @@ int main(int argc, char** argv[])
 	s->addComponent("env", "AmpEnvelope");
 	s->linkAudio("osc", "env");
 	s->linkAudio("env", "output");
+	s->setParameterRaw("output", "gain",1.7);
+	s->setParameterRaw("osc", "octaves", 1);
 	
 	Synth* s1 = e.addSynth();
 	s1->addComponent("osc", "SimpleOscillator");

@@ -48,7 +48,7 @@ class _TickTime {
 };
 
 
-class MidiFile {
+class __declspec(dllexport) MidiFile {
    public:
                 MidiFile                  (void);
                 MidiFile                  (const char* aFile);

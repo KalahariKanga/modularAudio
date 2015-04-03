@@ -22,7 +22,7 @@ typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned long  ulong;
 
-class MidiMessage : public vector<uchar> {
+class __declspec(dllexport) MidiMessage : public vector<uchar> {
 	public:
 		               MidiMessage          (void);
 		               MidiMessage          (int command);

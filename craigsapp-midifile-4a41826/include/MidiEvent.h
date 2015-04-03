@@ -23,7 +23,7 @@ typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned long  ulong;
 
-class MidiEvent : public MidiMessage {
+class __declspec(dllexport) MidiEvent : public MidiMessage {
    public:
                  MidiEvent     (void);
                  MidiEvent     (int command);
