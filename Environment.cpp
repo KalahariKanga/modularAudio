@@ -29,42 +29,23 @@ short* Environment::getBuffer()
 	return buffer.data;
 }
 
+MidiPlayer* Environment::addPlayer(std::string fname)
+{
+	MidiPlayer* mp = new MidiPlayer(fname);
+	players.push_back(mp);
+	return mp;
+}
+
 void Environment::update()
 {
 	end = std::chrono::system_clock::now();
 	std::chrono::duration<double> elapsed_seconds = end - start;
 	//play midi file
-	if (midiFileIsPlaying)
-	{
-		midiTicks += 350;// elapsed_seconds.count() / tickLength;
-		for (int t = 1; t < midifile.getNumTracks(); t++)
-		{
-			while (midifile[t].getSize() > midiEventCount[t] && midifile[t][midiEventCount[t]].tick < midiTicks)
-			{
-				if (midifile[t][midiEventCount[t]].isNoteOn())
-				{
-					Notes n = (Notes)(midifile[t][midiEventCount[t]].getKeyNumber() - 1);
-					int v = midifile[t][midiEventCount[t]].getP2();
-					if (synthMap.find(t) != synthMap.end())
-						synthMap[t]->noteDown(Note(n, v));
-					//std::cout << "Note down!" << n << "\n";
-					events.push_back(midifile[t][midiEventCount[t]]);
-				}
-				if (midifile[t][midiEventCount[t]].isNoteOff())
-				{
-					Notes n = (Notes)(midifile[t][midiEventCount[t]].getKeyNumber() - 1);
-					int v = midifile[t][midiEventCount[t]].getP2();
-					if (synthMap.find(t) != synthMap.end())
-						synthMap[t]->noteUp(Note(n, v));
-					//std::cout << "Note up!\n";
-					events.push_back(midifile[t][midiEventCount[t]]);
-				}
-				midiEventCount[t]++;
-			}
-		}
-	}
+	for (auto c : players)
+		c->update(0); //put in delta
 	start = std::chrono::system_clock::now();
 	
+
 
 
 
@@ -80,22 +61,4 @@ void Environment::update()
 	}
 	
 	AudioComponent::n++;
-}
-
-void Environment::loadMidiFile(std::string fname)
-{
-	midifile.read(fname);
-}
-
-void Environment::assignMidiTrack(int track, Synth* s)
-{
-	synthMap.insert(std::pair<int, Synth*>(track, s));
-}
-
-void Environment::playMidiFile()
-{
-	midiFileIsPlaying = 1;
-	midifile.absoluteTicks();
-	tickLength = 60000 / (midifile.getTicksPerQuarterNote() * 120);
-	start = std::chrono::system_clock::now();
 }

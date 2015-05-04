@@ -53,12 +53,12 @@ int main(int argc, char** argv[])
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	AudioComponent::n = 0;
 	//s->playNoteDuration(Note(c3, 100), 3);
-	e.loadMidiFile("tithe.mid");
-	e.assignMidiTrack(0, s);
-	e.assignMidiTrack(1, s1);
-	e.assignMidiTrack(2, s);
-	e.assignMidiTrack(3, s2);
-	e.playMidiFile();
+	MidiPlayer* mp = e.addPlayer("tithe.mid");
+	mp->assignTrack(0, s);
+	mp->assignTrack(1, s1);
+	mp->assignTrack(2, s);
+	mp->assignTrack(3, s2);
+	mp->play();
 	while (1)
 	{
 		
