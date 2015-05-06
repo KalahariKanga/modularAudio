@@ -27,7 +27,7 @@ void MidiPlayer::update(float delta)
 					if (synthMap.find(t) != synthMap.end())
 						synthMap[t]->noteDown(Note(n, v));
 					
-					events.push_back(midifile[t][midiEventCount[t]]);
+					events.push_back(MidiPlayerEvent(midifile[t][midiEventCount[t]], ID));
 				}
 				if (midifile[t][midiEventCount[t]].isNoteOff())
 				{
@@ -36,7 +36,7 @@ void MidiPlayer::update(float delta)
 					if (synthMap.find(t) != synthMap.end())
 						synthMap[t]->noteUp(Note(n, v));
 					
-					events.push_back(midifile[t][midiEventCount[t]]);
+					events.push_back(MidiPlayerEvent(midifile[t][midiEventCount[t]], ID));
 				}
 				midiEventCount[t]++;
 			}
@@ -59,4 +59,9 @@ void MidiPlayer::play()
 	isPlaying = 1;
 	midifile.absoluteTicks();
 	tickLength = 60000 / (midifile.getTicksPerQuarterNote() * 120);
+}
+
+void MidiPlayer::setTicks(int ticks)
+{
+	midiTicks = ticks;
 }

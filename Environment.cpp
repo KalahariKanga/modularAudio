@@ -33,6 +33,7 @@ MidiPlayer* Environment::addPlayer(std::string fname)
 {
 	MidiPlayer* mp = new MidiPlayer(fname);
 	players.push_back(mp);
+	mp->ID = players.size();
 	return mp;
 }
 

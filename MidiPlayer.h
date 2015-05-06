@@ -1,5 +1,6 @@
 #pragma once
 #include "MidiFile.h"
+#include "MidiPlayerEvent.h"
 #include "Synth.h"
 class _declspec(dllexport) MidiPlayer
 {
@@ -13,11 +14,13 @@ public:
 	MidiPlayer(std::string);
 	~MidiPlayer();
 
-	std::vector<MidiEvent> events;
+	std::vector<MidiPlayerEvent> events;
 
 	void update(float delta);
 	void loadFile(std::string);
 	void assignTrack(int track, Synth* s);
 	void play();
+	void setTicks(int ticks);
+	int ID;
 };
 
