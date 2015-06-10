@@ -213,3 +213,13 @@ void Synth::playNoteDuration(Note note, float seconds)
 	noteDown(note);
 	noteUpTimer[(int)note.note] = seconds;
 }
+
+std::vector<std::string> Synth::getComponentList()
+{
+	std::vector<std::string> list;
+	for (auto c : collections[0]->components)
+	{
+		list.push_back((c.second)->name);
+	}
+	return list;
+}

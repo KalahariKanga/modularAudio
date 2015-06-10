@@ -59,6 +59,7 @@ int main(int argc, char** argv[])
 	mp->assignTrack(2, s);
 	mp->assignTrack(3, s2);
 	mp->play();
+
 	while (1)
 	{
 		

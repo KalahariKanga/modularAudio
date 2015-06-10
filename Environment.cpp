@@ -45,10 +45,6 @@ void Environment::update()
 	for (auto c : players)
 		c->update(0); //put in delta
 	start = std::chrono::system_clock::now();
-	
-
-
-
 
 	buffer.zero();
 	//update synths

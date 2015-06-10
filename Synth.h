@@ -8,6 +8,7 @@ class __declspec(dllexport) Synth
 	const int polyphony = 16;
 	AudioBuffer buffer;
 	float noteUpTimer[100];
+	int activeNotes;
 public:
 	Synth();
 	~Synth();
@@ -20,11 +21,14 @@ public:
 	void linkCV(std::string from, std::string param1, std::string to, std::string param2, float amount);
 	void noteDown(Note note);
 	void noteUp(Note note);
-	int activeNotes;
+	
 	short* getBuffer();
 	void savePatch(std::string fname);
 	void loadPatch(std::string fname);
 	void playNoteDuration(Note note, float seconds);
+
+	std::vector<std::string> getComponentList();
+
 
 };
 

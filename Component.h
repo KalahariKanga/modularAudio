@@ -25,5 +25,6 @@ public:
 	std::string name;
 
 	void addParameter(Parameter* param, std::string name, float value, float min, float max, bool readOnly = 0);
+	std::vector<std::string> getParameterList();
 };
 

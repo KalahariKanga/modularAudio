@@ -42,3 +42,13 @@ void Component::addParameter(Parameter* param, std::string name, float value, fl
 	param->create(name, value, min, max, readOnly);
 	parameters.insert(std::pair<std::string, Parameter*>(name, param));
 }
+
+std::vector<std::string> Component::getParameterList()
+{
+	std::vector<std::string> list;
+	for (auto p : parameters)
+	{
+		list.push_back((p.second)->name);
+	}
+	return list;
+}
