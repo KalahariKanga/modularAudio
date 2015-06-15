@@ -107,6 +107,11 @@ short* Synth::getBuffer()
 	return buffer.data;
 }
 
+Component* Synth::getComponent(std::string name)
+{
+	return collections[0]->components.at(name);
+}
+
 void Synth::loadPatch(std::string fname)
 {
 	std::ifstream stream;

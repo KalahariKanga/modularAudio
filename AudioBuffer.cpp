@@ -36,3 +36,8 @@ bool AudioBuffer::isZero()
 			return 0;
 	return 1;
 }
+
+bool AudioBuffer::loadFromFile(std::string fname)
+{
+	return 0;
+}

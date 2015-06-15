@@ -5,7 +5,7 @@
 #include "Parameter.h"
 #include "Link.h"
 
-class Component
+class __declspec(dllexport) Component
 {
 public:
 	Component();

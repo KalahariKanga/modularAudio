@@ -1,6 +1,6 @@
 #pragma once
 #include "core.h"
-class Parameter
+class __declspec(dllexport) Parameter
 {
 	float value, baseValue;
 public:

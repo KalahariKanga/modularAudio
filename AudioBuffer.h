@@ -9,5 +9,6 @@ public:
 	short& operator[](int i);
 	void zero();
 	bool isZero();
+	bool loadFromFile(std::string fname);
 };
 

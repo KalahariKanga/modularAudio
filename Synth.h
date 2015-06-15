@@ -23,6 +23,7 @@ public:
 	void noteUp(Note note);
 	
 	short* getBuffer();
+	Component* getComponent(std::string name);
 	void savePatch(std::string fname);
 	void loadPatch(std::string fname);
 	void playNoteDuration(Note note, float seconds);
