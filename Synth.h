@@ -5,6 +5,7 @@
 class __declspec(dllexport) Synth
 {
 	std::vector<Collection*> collections;
+	std::vector<std::string> componentList;
 	const int polyphony = 16;
 	AudioBuffer buffer;
 	float noteUpTimer[100];
@@ -14,7 +15,7 @@ public:
 	~Synth();
 	
 	void update();
-	void addComponent(std::string name, std::string type);
+	void addComponent(const std::string& name, const std::string& type);
 	void setParameter(std::string component, std::string parameter, float value);
 	void setParameterRaw(std::string component, std::string parameter, float value);
 	void linkAudio(std::string from, std::string to);
@@ -28,7 +29,8 @@ public:
 	void loadPatch(std::string fname);
 	void playNoteDuration(Note note, float seconds);
 
-	std::vector<std::string> getComponentList();
+	std::vector<std::string>* getComponentList();
+	std::vector<std::string> getComponentTypesList();
 
 
 };

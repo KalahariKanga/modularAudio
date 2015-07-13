@@ -14,6 +14,7 @@ class ComponentFactory
 public:
 	ComponentFactory();
 	~ComponentFactory();
+	static std::vector<std::string> getTypesList();
 	static Component* makeComponent(std::string type);
 };
 

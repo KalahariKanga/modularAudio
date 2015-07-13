@@ -45,8 +45,9 @@ void Synth::update()
 	}
 }
 
-void Synth::addComponent(std::string name, std::string type)
+void Synth::addComponent(const std::string& name, const std::string& type)
 {
+	std::cout << name << " " << type << std::endl;
 	for (auto c : collections)
 		c->addComponent(name, type);
 }
@@ -219,12 +220,17 @@ void Synth::playNoteDuration(Note note, float seconds)
 	noteUpTimer[(int)note.note] = seconds;
 }
 
-std::vector<std::string> Synth::getComponentList()
+std::vector<std::string>* Synth::getComponentList()
 {
-	std::vector<std::string> list;
+	componentList.clear();
 	for (auto c : collections[0]->components)
 	{
-		list.push_back((c.second)->name);
+		componentList.push_back((c.second)->name);
 	}
-	return list;
+	return &componentList;
+}
+
+std::vector<std::string> Synth::getComponentTypesList()
+{
+	return ComponentFactory::getTypesList();
 }

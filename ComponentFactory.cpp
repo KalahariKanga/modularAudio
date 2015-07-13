@@ -3,11 +3,27 @@
 
 ComponentFactory::ComponentFactory()
 {
+	
 }
 
 
 ComponentFactory::~ComponentFactory()
 {
+}
+
+std::vector<std::string> ComponentFactory::getTypesList()
+{
+	std::vector<std::string> types;
+	types.push_back("AdditiveOscillator");
+	types.push_back("AmpEnvelope");
+	types.push_back("LFO");
+	types.push_back("AudioOutput");
+	types.push_back("SimpleOscillator");
+	types.push_back("Delay");
+	types.push_back("Filter");
+	types.push_back("NoiseOscillator");
+	types.push_back("Envelope");
+	return types;
 }
 
 Component* ComponentFactory::makeComponent(std::string type)
